@@ -1,0 +1,52 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+:root{
+  --BACKGROUND-900: linear-gradient(90deg, rgba(0,10,15,1) 55%, rgba(24,31,57,1) 100%);
+  --BACKGROUND-800: #1d2529;
+  --BACKGROUND-700: #131934;
+  --BACKGROUND-600: #00111A;
+
+
+  --GRAY-300: #5d606b;
+  --GRAY-200: #9497a1;
+  --GRAY-100: #bfc0c6;
+
+
+  --WHITE-300: #d7dae8 ;
+  --BLACK-100: #020511;
+
+  --RED-300: #63000e;
+
+
+  font-size: 62.5%;
+}
+
+
+html, body{
+  background: var(--BACKGROUND-900);
+}
+
+button{
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input{
+  outline: none;
+  background: none;
+}
+
+
+
+
+
+button, a, h1{
+  cursor: pointer;
+}
