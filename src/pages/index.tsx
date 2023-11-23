@@ -1,12 +1,19 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Poppins } from 'next/font/google'
+
+//icons
 import {FiSearch} from 'react-icons/fi'
+import { AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 import styles from '../styles/Home.module.scss'
 import backgroundIMg  from '../../public/backgroundImgHome.jpg'
+
+//componentes
 import Input from '@/components/Input'
 import Footer from '@/components/Footer'
+import Button from '@/components/Button'
 
 const poppins = Poppins({
    weight: ['400'], 
@@ -28,16 +35,37 @@ export default function Home() {
 
       <main className={`${poppins.className} ${styles.main} `}>
 
+     <div className={styles.signIn}>
+        <h1>Faça login</h1>
+
+        <Input
+        icon={AiOutlineMail}
+        placeholder='Ex.: user@email.com'
+        type='email'/>
+
+        <Input
+        icon={RiLockPasswordLine}
+        placeholder='No mínimo 6 caracteres'
+        type='password'/>
+
+          <Button
+          isLoading = {true}
+          title='Entrar' />
+
+          <h1>Crie seu portifólio</h1>
+      </div>
+
       <Image className={styles.backGroundIMg}  src={backgroundIMg} alt="Imagem de fundo page Home" />
 
-      <div className={styles.inputHome} >
-          <Input
+      <div className={`${styles.inputWithList}`} >
+        <Input
         icon={FiSearch}
         placeholder='Pequise pelo nome do usuário'
         isLoading= {true}
         type='text'/>
       </div>
       
+     
 
 
       </main>
