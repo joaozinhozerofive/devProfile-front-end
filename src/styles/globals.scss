@@ -4,12 +4,21 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar{
+  width: 0.5rem;
+}
+::-webkit-scrollbar-thumb{
+  background: var(--BACKGROUND-1000);
+  border-radius: 5rem;
+}
+
 
 
 :root{
+  --BACKGROUND-1000 :rgba(0,10,15,1);
   --BACKGROUND-900: linear-gradient(90deg, rgba(0,10,15,1) 55%, rgba(24,31,57,1) 100%);
   --BACKGROUND-800: #1d2529;
-  --BACKGROUND-700: #131934;
+  --BACKGROUND-700: #01020a;
   --BACKGROUND-600: #00111A;
 
 
@@ -29,9 +38,11 @@
 }
 
 
-html, body{
-  background: var(--BACKGROUND-900);
+body{
+  max-width: 100%;
+  background: var(--BACKGROUND-1000);
 }
+
 
 button{
   border: none;

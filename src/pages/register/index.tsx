@@ -5,9 +5,10 @@ import { Poppins } from 'next/font/google'
 import {FiSearch} from 'react-icons/fi'
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 
-import styles from '../styles/Home.module.scss'
-import backgroundIMg  from '../../public/backgroundImgHome.jpg'
+
+import styles from './styles.module.scss'
 
 //componentes
 import Input from '@/components/Input'
@@ -65,30 +66,42 @@ const poppins = Poppins({
           </div>
       </div>
 
-      <div className={styles.signIn}>
+      <div className={styles.signUp}>
+        <h1>Crie seu portifólio</h1>
 
-        <h1>Faça login</h1>
+        <label htmlFor="username">
+           <p>Nome de usuário</p> 
+            <Input
+            id='username'
+            icon={CgProfile}
+            placeholder='usuário2005'
+            type='text'/>
+        </label>
+
 
         <label htmlFor="email">
-            <p>Email</p>
+           <p>Email</p> 
             <Input
+            id='email'
             icon={AiOutlineMail}
-            placeholder='Ex.: user@email.com'
+            placeholder='Ex.: usuário@email.com'
             type='email'/>
-        </label>     
+        </label>
 
         <label htmlFor="password">
-            <p>Senha</p>
+           <p>Senha</p> 
             <Input
+            id='password'
             icon={RiLockPasswordLine}
             placeholder='No mínimo 6 caracteres'
             type='password'/>
         </label>
+
           <Button
           isLoading = {true}
           title='Entrar' />
 
-          <h1>Crie seu portifólio</h1>
+          <h1>Já sou usuário</h1>
       </div>
       
      

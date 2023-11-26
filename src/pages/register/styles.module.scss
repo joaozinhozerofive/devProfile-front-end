@@ -1,0 +1,192 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    width: 155%;
+    
+    height: 100rem;
+  }
+  .main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+  
+    width: 100%;
+    height: 100%;
+    position: relative;
+  
+    background-image: url('../../../public/backgroundImgHome.jpg');
+    background-size: cover;
+    background-position: center;
+  
+  }
+  
+  
+  
+  
+  .inputWithList{
+    margin-top: 5rem;
+    max-width: 100%;
+    
+  
+    .userList{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      gap: 0.2rem;
+  
+      margin-top: 0.5rem;
+      height: 30rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+  
+      border-radius: 0 0 1rem 1rem;
+  
+  
+    }
+  
+  
+      div:nth-child(1){
+        width: 40rem;
+        padding: 1rem;
+  
+      }
+  
+      input{
+        font-size: 1.8rem;
+        padding: 2rem 2rem;
+      }
+  }
+  
+  
+  
+  
+  
+  
+  
+  .signUp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  
+    margin-bottom: 20%;
+    
+    background: var(--BACKGROUND-600);
+    
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+
+    label{
+        p{
+          margin-bottom: 0.2rem;
+          font-size: 1.5rem;
+          color: var(--WHITE-300);  
+        }
+        
+    }
+    
+    input{
+      font-size: 1.8rem;
+      
+      padding: 2rem ;
+    }
+    
+    button{
+      padding: 1.2rem;
+    }
+  
+    h1{
+      font-weight: 100;
+      font-size: 1.8rem;
+      color: var(--WHITE-300);
+    }
+  }
+  
+  .footerHome{
+    width: 155%;
+    font-size: 0.8rem;
+  }
+  
+  
+  
+  @media(min-width: 425px){
+    .page{
+      width: 100%;
+    }
+  
+    .footerHome{
+      width: 100%;
+    }
+  }
+  
+  @media(min-width : 1290px){
+    
+    .main{
+      padding: 5rem;
+      gap: 25rem;
+  
+  
+      flex-direction: row;
+      align-items: start;
+    }
+  
+  
+    .inputWithList{
+  
+      .userList{
+        height: 50rem;
+      }
+    
+        div:nth-child(1){
+          width: 60rem;
+          padding: 1.2rem;
+        }
+    
+        input{
+          font-size: 2rem;
+          padding: 2rem 2rem;
+        }
+    }
+  
+    .signUp{
+      margin-top: 5rem;
+  
+      gap: 3rem;
+      width: 50rem;
+      
+      padding: 3rem 2rem;
+  
+      
+      
+      input{
+        padding: 2rem ;
+      }
+      
+      button{
+        padding: 1.2rem;
+      }
+    
+      h1{
+        font-weight: 100;
+        font-size: 1.8rem;
+        color: var(--WHITE-300);
+      }
+    }
+  
+  
+  }
+  
+  @media(min-width : 1600px){
+    .signUp{
+      margin-right: 20%;
+    }
+  
+  }
+  
+  
+  
+  
+  

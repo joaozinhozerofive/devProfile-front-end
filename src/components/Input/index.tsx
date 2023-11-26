@@ -8,9 +8,9 @@ import { Poppins } from 'next/font/google';
 import Loading  from '../Loading';
 
 
-interface inputProps extends InputHTMLAttributes<HTMLInputElement>{ 
+interface InputProps extends InputHTMLAttributes<HTMLInputElement>{ 
     className? : string,
-    icon?: IconType, 
+    icon?: React.ComponentType<{ color: string; size: number }>, 
     type : string
     isLoading? : boolean
     placeholder? : string
@@ -23,11 +23,11 @@ const poppins = Poppins({
    })
 
 
-export default function Input({icon : Icon, type, isLoading, placeholder, className, ...rest} : inputProps){
+export default function Input({icon : Icon, type, isLoading, placeholder, className, ...rest} : InputProps){
     return(
         <div className={`${styles.input} `} >
             
-            {Icon && <Icon color='gray' size={20}/>}
+            {Icon && <Icon color='gray' size={20} />}
 
             <input
              className={`${poppins.className} ${className}`}

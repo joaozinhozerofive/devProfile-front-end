@@ -1,0 +1,57 @@
+.imageList{
+    border-radius: 50%;
+    border: 0.2rem solid var(--WHITE-300);
+
+    object-fit: cover;
+}
+
+
+
+
+.main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+
+    padding: 1rem;
+
+    width: 100%;
+
+    color: var(--WHITE-300);
+
+    border-radius: 1rem;
+
+    background: var(--BACKGROUND-600);
+
+
+
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        gap: 0.2rem;
+    }
+
+    h1{
+        letter-spacing: 0.1rem;
+
+        font-weight: 400;
+
+    }
+
+    p{
+        max-width: 20rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; 
+        -webkit-box-orient: vertical;
+         overflow: hidden;
+
+         text-align: left;
+
+         color: var(--GRAY-200);
+
+         font-size: 1.5rem;
+    }
+}

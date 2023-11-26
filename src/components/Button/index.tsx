@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 
 
 
-interface buttonProps extends ButtonHTMLAttributes<HTMLInputElement>{ 
+interface ButtonProps extends ButtonHTMLAttributes<HTMLInputElement>{ 
     className? : string,
     icon?: IconType, 
     isLoading? : boolean
@@ -20,7 +20,7 @@ const poppins = Poppins({
     subsets : ['latin'] // obrigatório
    })
 
-   export default function Input({icon : Icon, isLoading, placeholder, className,title, ...rest} : buttonProps){
+   export default function Input({icon : Icon, isLoading, placeholder, className,title, ...rest} : ButtonProps){
     return(
         <button 
         type='button'
@@ -29,7 +29,7 @@ const poppins = Poppins({
         >
             
             {Icon && <Icon color='white' size={20}/>}
-            <p>{isLoading ? <Loading/> : title }</p>
+            {isLoading ? <Loading/> : title }
             
 
         </button>

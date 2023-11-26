@@ -11,11 +11,11 @@ const poppins = Poppins({
    })
 
 
-   interface footerProps{
+   interface FooterProps{
     className : string
    }
 
-export default function Footer({className} : footerProps){
+export default function Footer({className} : FooterProps){
     return(
         <div className={`${styles.footerContainer} ${poppins.className} ${className}`}>
        

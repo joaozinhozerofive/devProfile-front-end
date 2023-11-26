@@ -13,11 +13,10 @@
     align-items: center;
     justify-content: center;
 
+    color: var(--WHITE-300);
 
 
-    p{
-        color: var(--WHITE-300);
-    }
+
 
     &disabled{
         background: var(--RED-200);
