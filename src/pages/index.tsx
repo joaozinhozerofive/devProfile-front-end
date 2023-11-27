@@ -14,6 +14,7 @@ import Input from '@/components/Input'
 import Footer from '@/components/Footer'
 import Button from '@/components/Button'
 import UsersList from '@/components/UsersList';
+import Link from 'next/link';
  
 
 const poppins = Poppins({
@@ -46,7 +47,6 @@ const poppins = Poppins({
 
       <main className={`${poppins.className} ${styles.main} `}>
 
-    
 
       <div className={`${styles.inputWithList}`} >
         <Input

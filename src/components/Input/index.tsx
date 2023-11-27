@@ -25,12 +25,12 @@ const poppins = Poppins({
 
 export default function Input({icon : Icon, type, isLoading, placeholder, className, ...rest} : InputProps){
     return(
-        <div className={`${styles.input} `} >
+        <div className={`${styles.input} ${className} `} >
             
             {Icon && <Icon color='gray' size={20} />}
 
             <input
-             className={`${poppins.className} ${className}`}
+             className={`${poppins.className} `}
              placeholder={placeholder}
              type={type}/>
 
