@@ -1,6 +1,9 @@
 import Loading  from '../Loading';
 import { ButtonHTMLAttributes } from 'react';
+
 import { Poppins } from 'next/font/google';
+
+
 import { IconType } from 'react-icons';
 import styles from './styles.module.scss'
 
@@ -25,7 +28,7 @@ const poppins = Poppins({
         <button 
         type='button'
         disabled={isLoading} 
-        className={`${styles.button} ${poppins.className}`} 
+        className={`${className} ${styles.button} ${poppins.className}`} 
         >
             
             {Icon && <Icon color='white' size={20}/>}

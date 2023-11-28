@@ -6,6 +6,7 @@
   outline: 0;
 
   text-decoration: none;
+  list-style: none;
 }
 
 ::-webkit-scrollbar{
@@ -20,7 +21,7 @@
 
 :root{
   --BACKGROUND-1000 :rgba(0,10,15,1);
-  --BACKGROUND-900: linear-gradient(90deg, rgba(0,10,15,1) 55%, rgba(24,31,57,1) 100%);
+  --BACKGROUND-900: linear-gradient(90deg, rgba(0,10,15,0.8) 35%, rgba(24,31,57,1) 100%);
   --BACKGROUND-800: #1d2529;
   --BACKGROUND-700: #01020a;
   --BACKGROUND-600: #00111A;
@@ -32,18 +33,23 @@
 
 
   --WHITE-300: #ffff ;
-  --BLACK-100: #020511;
+  --BLACK-100: #010208;
 
   --RED-300: #63000e;
   --RED-200: #832532;
+
+  --GREEN-500 : rgb(42, 201, 180);
+
+  --ICEBLUE-100 : rgb(42, 169, 201) ;
+
+
+  --PINK-100 : rgb(212, 57, 83);
 
 
   font-size: 62.5%;
 }
 
-
 body{
-  max-width: 100%;
   background: var(--BACKGROUND-1000);
 }
 
@@ -54,15 +60,29 @@ button{
   cursor: pointer;
 }
 
+a{
+  
+  color: var(--WHITE-300);
+
+}
+
+a, svg, button, h1, li{
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 input{
   outline: none;
   background: none;
 }
 
 
+//hover
+button:hover{
+  scale: 1.1;
+}
 
-
-
-button, a, h1{
-  cursor: pointer;
+a:hover{
+  filter: brightness(0.8);
+  scale: 1.5;
 }

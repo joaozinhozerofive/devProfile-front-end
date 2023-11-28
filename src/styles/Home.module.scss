@@ -2,21 +2,22 @@
   display: flex;
   flex-direction: column;
   width: 155%;
-  
-  height: 100rem;
+  max-height: 100%;
+
+
 }
 .main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 5rem;
 
   width: 100%;
   height: 100%;
   position: relative;
 
-  background-image: url('../../public/backgroundImgHome.jpg');
+  background-image: url('../../public//backgroundImgHome.jpg');
   background-size: cover;
   background-position: center;
 
@@ -35,7 +36,6 @@
     flex-direction: column;
     align-items: center;
 
-    gap: 0.2rem;
 
     margin-top: 0.5rem;
     height: 30rem;
@@ -108,22 +108,24 @@
 }
 
 .footerHome{
-  width: 155%;
   font-size: 0.8rem;
 }
 
 
 
-@media(min-width: 425px){
+@media(min-width: 320px){
   .page{
-    width: 100%;
+    min-height: 150rem;
   }
-
-  .footerHome{
-    width: 100%;
-  }
+  
 }
 
+@media (min-width : 400px){
+  .page{
+    max-width: 100%;
+  }
+
+}
 @media(min-width : 1290px){
   
   .main{

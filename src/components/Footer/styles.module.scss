@@ -8,11 +8,20 @@
 
     gap: 1rem;
 
-
+    width: 100%;
 
     justify-content: space-between;
 
     background: var(--BACKGROUND-600);
+
+
+    font-size: 0.8rem;
+
+
+
+    grid-area: footer;
+
+
 
 
     h1, h2{
@@ -29,4 +38,12 @@
         align-items: center;
     }
 
+
+
+    
+}
+@media(min-width: 768px){
+    .footerContainer{
+        font-size: 1rem;
+    }
 }

@@ -1,0 +1,25 @@
+.page{
+    width: 145vw;
+    height: 150vh;
+    background: var(--BACKGROUND-900);
+    color: var(--WHITE-300);
+
+    display: grid;
+
+
+    grid-template-rows: 90%;
+    grid-template-areas:
+    "main"
+    "footer" ;
+
+
+
+    main{
+        height: 100%;
+        grid-area: main;
+
+        padding: 5rem;
+    }
+
+
+}

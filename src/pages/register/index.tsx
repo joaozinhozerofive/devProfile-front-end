@@ -105,8 +105,9 @@ const poppins = Poppins({
 
 
       </main>
+      
+      <Footer className={styles.footerHome} />
     </div>
-      <Footer className = {styles.footerHome} />
     </>
   )
 }

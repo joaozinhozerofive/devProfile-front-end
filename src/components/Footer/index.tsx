@@ -12,14 +12,14 @@ const poppins = Poppins({
 
 
    interface FooterProps{
-    className : string
+    className? : string
    }
 
 export default function Footer({className} : FooterProps){
     return(
-        <div className={`${styles.footerContainer} ${poppins.className} ${className}`}>
+        <div className={`${styles.footerContainer} ${poppins.className} ${className} `}>
        
-        <div className={styles.footer}>
+        <div className={`${styles.footer} `}>
             <Image className={styles.imgFooter} src={devIcon} alt="Logo dev Profile" />
             <h1>Dev Profile</h1>
          </div>
