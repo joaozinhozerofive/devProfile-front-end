@@ -15,7 +15,13 @@ import Button from '@/components/Button'
 import Footer from '@/components/Footer'
 import Brand from '@/components/Brand'
 import Menu from '@/components/Menu'
-import LayoutPortfolio from '@/components/Layout Portfolio';
+import { HTMLAttributes, ReactNode } from 'react';
+
+//interfaces
+interface LayoutPortfolioProps extends HTMLAttributes<HTMLDivElement>{
+    children : ReactNode, 
+    className? : string,
+}
 
 const roboto = Roboto({
     weight: ['400'], 
@@ -23,7 +29,7 @@ const roboto = Roboto({
     subsets : ['latin'] // obrigatório
    })
 
-export default function Portfolio(){
+export default function LayoutPortfolio({children, className, ...rest} : LayoutPortfolioProps){
     const {query} = useRouter()
     const id = query?.id
     return (
@@ -35,26 +41,23 @@ export default function Portfolio(){
             <title>Dev Profile - joaozerofive</title>
         </Head>
         
-
-<LayoutPortfolio className={styles.layout}>
-
-        <main>
-            <h1>Olá, <br /> meu nome é João, <br /> Desenvolvedor Web Full Stack</h1>
-
-            <p>Web Developer Full Stack</p>
-
-            <Button
-            className={styles.button}
-            isLoading = {false}
-            title='Fale comigo!'
-            />
-        </main>
+<div className={`${styles.page} ${roboto.className} ${className}`}>
 
 
+        <Brand className={styles.brand}/>
 
-</LayoutPortfolio>
+        
+            {children}
 
-      
+        
+
+        <Menu  />
+
+        <Footer />
+
+
+</div>
+
 
         </>
     )

@@ -22,9 +22,11 @@
     grid-area: footer;
 
 
+    .h1{
+        color: var(--BLACK-100);
+    }
 
-
-    h1, h2{
+    h2{
         color: var(--WHITE-300);
         white-space: nowrap;
     }

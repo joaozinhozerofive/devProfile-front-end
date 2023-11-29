@@ -1,24 +1,61 @@
-.page{
-    width: 145vw;
-    height: 150vh;
-    background: var(--BACKGROUND-900);
-    color: var(--WHITE-300);
-
-    display: grid;
-
-
-    grid-template-rows: 90%;
-    grid-template-areas:
-    "main"
-    "footer" ;
-
-
-
+.layout{
     main{
         height: 100%;
         grid-area: main;
 
-        padding: 5rem;
+        padding: 3rem 1rem 5rem 3rem ;
+
+
+        background: var(--BACKGROUND-900);
+
+
+
+
+        a{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+
+            letter-spacing: 0.1rem;
+            font-size: 2rem;
+
+
+
+            margin-bottom: 5rem;
+        }
+
+
+        .content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 5rem;
+
+
+            gap: 3rem;
+
+
+
+            .h1{
+                font-size: 3rem;
+                padding: 1rem;
+
+                line-height: 5rem;
+
+                border-bottom: 1px solid var(--GRAY-300);
+                
+            }
+
+            p{
+                font-size: 2rem;
+                line-height: 3rem;
+
+                padding-top: 10%;
+            }
+        }
     }
 
 

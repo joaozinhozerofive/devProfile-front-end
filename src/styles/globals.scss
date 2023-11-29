@@ -7,6 +7,13 @@
 
   text-decoration: none;
   list-style: none;
+
+
+  transition: 0.2s;
+
+
+  font-family:  sans-serif;
+
 }
 
 ::-webkit-scrollbar{
@@ -21,7 +28,7 @@
 
 :root{
   --BACKGROUND-1000 :rgba(0,10,15,1);
-  --BACKGROUND-900: linear-gradient(90deg, rgba(0,10,15,0.8) 35%, rgba(24,31,57,1) 100%);
+  --BACKGROUND-900: linear-gradient(90deg, rgba(0,10,15,0.5) 80%, rgba(24,31,57,1) 100%);
   --BACKGROUND-800: #1d2529;
   --BACKGROUND-700: #01020a;
   --BACKGROUND-600: #00111A;
@@ -49,7 +56,18 @@
   font-size: 62.5%;
 }
 
+main{
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
 body{
+
   background: var(--BACKGROUND-1000);
 }
 
@@ -83,6 +101,5 @@ button:hover{
 }
 
 a:hover{
-  filter: brightness(0.8);
-  scale: 1.5;
+  scale: 1.05;
 }

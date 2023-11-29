@@ -28,7 +28,6 @@ const poppins = Poppins({
   export default function Home() {
   const user = {
     username : "joaozerofive", 
-    image : "https://pbs.twimg.com/profile_images/1703547283462029312/xK9Io582_400x400.jpg", 
     biography : "Entusiasta em programação com mais de 2 anos de experiência que busca novas oportunidades no mercado de trabalho."
   }
   return (
@@ -36,7 +35,6 @@ const poppins = Poppins({
 
       <Head>
         <title>Dev Profile</title>
-        <link rel="icon" href="/devIcon.png"  />
       </Head>
 
 

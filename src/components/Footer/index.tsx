@@ -1,5 +1,11 @@
-import Image from "next/image"
+//styles
 import styles from './styles.module.scss'
+
+//components
+import Image from "next/image"
+import TextShadow from '../TextShadow'
+
+//assets
 import devIcon from '../../../public/devIcon.png'
 
 import { Poppins } from "next/font/google"
@@ -21,7 +27,10 @@ export default function Footer({className} : FooterProps){
        
         <div className={`${styles.footer} `}>
             <Image className={styles.imgFooter} src={devIcon} alt="Logo dev Profile" />
-            <h1>Dev Profile</h1>
+            <TextShadow 
+            className={styles.h1}
+            title='Dev Profile'
+            />
          </div>
 
         <h2>&copy; 2023 - Todos os direitos reservados.</h2>

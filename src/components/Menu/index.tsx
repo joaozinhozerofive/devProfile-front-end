@@ -12,7 +12,7 @@
 
 
  //types
- import {HTMLAttributes} from 'react'
+import {HTMLAttributes} from 'react'
 import { useRouter } from 'next/router';
 
 
@@ -31,7 +31,19 @@ interface UserProps{
  export default function Menu({className, user, ...rest} : MenuProps){
      
      const routes = useRouter();
-     const {id}   = routes.query as { id : string | number}
+     const {id}   = routes.query as { id : string }
+
+
+     function pathNameIncludes(path : string ){
+
+        const pathIsIncludes : boolean = routes.pathname.includes(path)
+
+
+        return pathIsIncludes
+     }
+
+
+     
 
 
     return(
@@ -40,12 +52,24 @@ interface UserProps{
 
 
             <ul>
-                <Link href={`./${id}/about`}> Sobre </Link>
-                <Link href="/sobre"> Habilidades </Link>
-                <Link href="/sobre"> Experiência </Link>
+                <Link 
+                 className={pathNameIncludes('about') ? styles.active : ""}
+                 href={`/portfolio/${id}/about`}>
+                    Sobre
+                 </Link>
+                 <Link 
+                 className={pathNameIncludes('skills') ? styles.active : ""}
+                 href={`/portfolio/${id}/skills`}>
+                    Habilidades
+                 </Link>
+                 <Link 
+                 className={pathNameIncludes('work') ? styles.active : ""}
+                 href={`/portfolio/${id}/skills`}>
+                    Experiência
+                 </Link>
                 <Link href="/sobre"> Contato </Link>
                 <Link href="/sobre"> Blog </Link>
-                <Link href="/sobre"> Edit <FiEdit2/> </Link> 
+                <Link href="/sobre"> Editar <FiEdit2/> </Link> 
             </ul>
 
 
@@ -64,6 +88,8 @@ interface UserProps{
 
                 </Link>
                 </div>
+
+
 
         </div>
     )

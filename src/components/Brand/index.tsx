@@ -1,6 +1,9 @@
 //estilização
 import styles from './styles.module.scss'
 
+//components
+import TextShadow from '../TextShadow'
+
 
 //types
 import {HTMLAttributes} from 'react'
@@ -25,7 +28,7 @@ export default function Brand({ className, user, ...rest } : BrandProps){
         {...rest}
         className={`${styles.brandContainer} ${className}`}>
 
-            <h1>j</h1>
+         <TextShadow className={styles.h1} title='J' />  
             
             <h3>João</h3>
 

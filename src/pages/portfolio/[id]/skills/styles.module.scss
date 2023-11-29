@@ -1,0 +1,65 @@
+.layout{
+    main{
+        grid-area: main;
+        padding: 3rem 1rem 5rem 1rem ;
+
+
+
+        .content{
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            margin-top: 5rem;
+
+            .h1{
+                font-size: 3rem;
+                margin-bottom: 2rem;
+            }
+
+          
+
+            ul{
+                display: flex;
+                flex-direction: column;
+
+                gap: 1rem;
+
+                flex-wrap: wrap;
+
+                height: 35vh;
+
+
+                overflow-x: auto;
+
+
+                li{
+                    background: var(--BLACK-100);
+                    border-radius: 1rem;
+                    
+                    font-size: 1.5rem;
+
+                    padding: 0.5rem;
+
+                    text-align: center;
+
+                }
+            }
+        }
+    }
+}
+
+
+@media(min-width : 768px){
+    .layout{
+        main{
+            .content{
+                ul{
+                    li{
+                        font-size: 2rem;
+                        max-width: none;
+                    }
+                }
+            }
+        }
+    }
+}

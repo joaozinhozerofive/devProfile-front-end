@@ -33,8 +33,6 @@ export default function UsersList({user, className, ...rest} : UserListProps){
 
             <div className={`${className} ${styles.main} ${roboto.className}`}>
                 <Image 
-                width={50}
-                height={50}
                 className={styles.imageList} 
                 src={user.image ? user.image : avatarUrl} 
                 alt='Imagem do usuário' />
