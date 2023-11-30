@@ -33,20 +33,14 @@ export default function About(){
 
 
 
-    function handleBack(){
-        routes.back()
-    }
+    
 
 
     return (
 
 <LayoutPortfolio className={styles.layout}>
-        <main>
 
-            <ButtonText
-            onClick={() => {handleBack()}}
-            icon={IoArrowBackSharp}
-             title='Voltar'/>
+            
 
             <div className={styles.content}>
 
@@ -67,7 +61,6 @@ export default function About(){
 
             </div>    
 
-        </main>
 
  </LayoutPortfolio>
         

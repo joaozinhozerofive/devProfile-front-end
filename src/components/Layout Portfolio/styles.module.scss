@@ -1,4 +1,4 @@
-.page{
+.layoutContainer{
     display: grid;
 
     grid-template-columns: minmax(10rem, 13rem) ;
@@ -8,6 +8,7 @@
     grid-template-areas: 
     "brand main"
     "menu main"
+    "newproject main"
     'footer footer'
     ;
 
@@ -16,13 +17,69 @@
     color: var(--WHITE-300);
 
 
+    .newProject{
+        background: red;
+        grid-area: newproject;
+    }
+
+
+
+    main{
+        grid-area: main;
+        padding: 3rem 1rem 5rem 1rem ;
+
+        background-image: url('../../../public//backgroundMainPortfolio.jpg');
+        background-size: cover;
+        background-position: center;
+
+        position: relative;
+
+
+
+        .logotipoWhats{
+            cursor: pointer;
+            position: fixed;
+
+            z-index: 100;
+
+            width: 5rem;
+            height: 5rem;
+
+            bottom: 17%;
+
+
+            &:hover{
+                scale: 1.2;
+            }
+        }
+    }
+
+
 }
 
 
+@media(min-width: 375px){
+
+    .layoutContainer{
+        main{
+            .logotipoWhats{
+        
+                bottom: 8%;
+            }
+        }
+    }
+    
+}
 @media(min-width: 768px){
-    .page{
-    grid-template-columns: minmax(15rem, 20rem) ;
-    grid-template-rows: minmax(12rem, 20rem) minmax(40rem, 100vh);
+    .layoutContainer{
+    grid-template-columns: minmax(15rem, 18rem) ;
+    grid-template-rows: minmax(12rem, 18rem) minmax(40rem, 100vh);
+
+    main{
+        .logotipoWhats{
+            bottom: 15%;
+        }
+    }
 
     }
 }

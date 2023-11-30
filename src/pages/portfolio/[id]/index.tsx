@@ -7,9 +7,6 @@ import Head from 'next/head';
 import styles from './styles.module.scss'
 
 
-//icons
-
-
 //components
 import Button from '@/components/Button'
 import Footer from '@/components/Footer'

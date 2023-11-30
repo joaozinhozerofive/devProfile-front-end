@@ -6,7 +6,10 @@
 
     border-radius: 0.5rem;
 
-    width: 100%;
+    max-width: 100%;
+    width: 70rem;
+
+    margin: 0 auto;
 
     display: flex;
     flex-direction: row;
@@ -18,7 +21,7 @@
 
 
 
-    &disabled{
-        background: var(--RED-200);
+    &:disabled{
+        filter: brightness(0.5);
     }
 }

@@ -1,7 +1,5 @@
 .layout{
-    main{
-        grid-area: main;
-        padding: 3rem 1rem 5rem 1rem ;
+       
 
 
 
@@ -33,8 +31,11 @@
 
 
                 li{
-                    background: var(--BLACK-100);
+                    background: var(--BACKGROUND-800);
+
                     border-radius: 1rem;
+                    border: 1px solid var(--GRAY-200);
+
                     
                     font-size: 1.5rem;
 
@@ -46,12 +47,10 @@
             }
         }
     }
-}
 
 
 @media(min-width : 768px){
     .layout{
-        main{
             .content{
                 ul{
                     li{
@@ -60,6 +59,5 @@
                     }
                 }
             }
-        }
     }
 }

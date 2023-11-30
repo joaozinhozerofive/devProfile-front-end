@@ -15,7 +15,7 @@ export default function Carousel(){
         <Swiper
         touchRatio={0.5}
         speed={1000}
-        slidesPerView={1}
+        slidesPerView={1.2}
         spaceBetween={10}
         modules={[ Navigation]}
         

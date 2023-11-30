@@ -2,6 +2,7 @@
 import {HTMLAttributes} from 'react'
 import { register } from 'swiper/element/bundle'
 register();
+
 //styles
 import styles from './styles.module.scss'
 
@@ -13,8 +14,13 @@ import "swiper/css/pagination";
 import Image from 'next/image';
 import TextShadow from '../TextShadow';
 
+//icons 
+import { FiEdit } from 'react-icons/fi';
 
-import avatarUrl from '../../../public/avatarUrl.png'
+
+import avatarUrl from '../../../public/exampleimagem.avif'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 //interfaces
 interface ProjectProps{
@@ -31,13 +37,34 @@ interface ProjectCardsProps extends  HTMLAttributes<HTMLDivElement>{
 
 
 export default function ProjectCards({project, className, ...rest} : ProjectCardsProps){
+    const routes = useRouter()
+    const {id} = routes.query
+    
+    function pathNameIncludes(path : string ){
+
+        const pathIsIncludes : boolean = routes.pathname.includes(path)
+
+
+        return pathIsIncludes
+     }
+
 
     return(
             <div className={styles.projectCards}>
+
                 <TextShadow 
                 className={styles.textShadow}
                 title='Loja de roupas'
                 />
+                <Link 
+                 className = {` ${pathNameIncludes('edit/skills') ? styles.fiEdit : 'hidden'}`}
+                 href={`/portfolio/${id}/edit/editProjects/5`}>
+
+                    <FiEdit
+                    size = {20} />
+
+                 </Link>
+
                 <Image
                 className={styles.projectImg}
                  src = {avatarUrl}

@@ -39,6 +39,10 @@
 
                 background: var(--BACKGROUND-800);
             }
+            a{
+                display: flex;
+                text-align: center;
+            }
             
 
             .active{
@@ -51,7 +55,23 @@
 
                 background: var(--BACKGROUND-800);
 
+                
+
             }
+
+            .button{
+                border-radius: 0.5rem;
+                
+                background-color: var(--RED-300);
+
+                padding: 0.5rem;
+                
+                display: flex;
+                text-align: center;
+            }
+
+
+            
 
             
 

@@ -1,0 +1,68 @@
+.layout{
+    .content{
+        display: flex;
+        flex-direction: column;
+
+        .textShadow{
+            font-size: 3rem;
+
+            margin: 0 auto;
+
+            margin-bottom: 5rem;
+
+
+            color: var(--WHITE-300);
+        }
+
+
+
+        .formEdit{
+            margin-bottom: 2rem;
+
+            label{
+                font-size: 1.3rem;
+                .input{
+                        padding: 1rem;
+                        margin-top: 1rem;
+                        margin-bottom: 1rem;
+
+                        svg{
+                            width: 1rem;
+                        }
+                        input{
+                            padding: 1rem;
+                            font-size: 0.9rem;
+
+                        }
+                }
+            }
+        }
+        
+    }
+}
+
+
+
+@media(min-width : 500px){
+    .layout{
+        .content{
+            .formEdit{
+                label{
+                    .input{
+                            padding: 1rem;
+                            svg{
+                                width: 2rem;
+                            }
+                            input{
+                                padding: 1rem;
+                                font-size: 1.2rem;
+    
+                            }
+                    }
+                }
+            }
+            
+        }
+    }
+
+}

@@ -5,11 +5,12 @@
  import { FaGithub } from "react-icons/fa";
  import { CiLinkedin } from "react-icons/ci";
  import { FiEdit2 } from "react-icons/fi";
-
+ import { FiPlus } from 'react-icons/fi';
 
  //components
  import Link from 'next/link';
-
+ import Button from '../Button';
+ 
 
  //types
 import {HTMLAttributes} from 'react'
@@ -57,21 +58,48 @@ interface UserProps{
                  href={`/portfolio/${id}/about`}>
                     Sobre
                  </Link>
+
                  <Link 
                  className={pathNameIncludes('skills') ? styles.active : ""}
                  href={`/portfolio/${id}/skills`}>
                     Habilidades
                  </Link>
+
                  <Link 
                  className={pathNameIncludes('work') ? styles.active : ""}
-                 href={`/portfolio/${id}/skills`}>
+                 href={`/portfolio/${id}/work`}>
                     Experiência
                  </Link>
-                <Link href="/sobre"> Contato </Link>
-                <Link href="/sobre"> Blog </Link>
-                <Link href="/sobre"> Editar <FiEdit2/> </Link> 
-            </ul>
 
+                 <Link 
+                 href={`/portfolio/${id}`}>
+                    Blog
+                 </Link>
+
+                <Link
+                 className={pathNameIncludes('edit') ? styles.active : ""}
+                 href={`/portfolio/${id}/edit`}> Editar <FiEdit2/>
+                </Link> 
+
+               <Link 
+               className={pathNameIncludes('newProject') ? styles.active : ""}
+               href={`/portfolio/${id}/newProject`}>
+
+                  <p> <FiPlus/> Novo Projeto</p>
+               </Link>
+
+
+              <Link 
+               className={pathNameIncludes('newWork') ? styles.active : ""}
+               href={`/portfolio/${id}/newWork`}>
+
+                  <p> <FiPlus/> Nova experiência</p>
+               </Link>
+                
+
+
+            </ul>
+            
 
                 <div>
                  <Link target = "_blank" href={'https://github.com/joaozinhozerofive'}>
@@ -88,7 +116,6 @@ interface UserProps{
 
                 </Link>
                 </div>
-
 
 
         </div>

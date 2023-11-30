@@ -6,6 +6,8 @@ import {FiSearch} from 'react-icons/fi'
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { MdComputer } from "react-icons/md";
+
 
 
 import styles from './styles.module.scss'
@@ -28,7 +30,6 @@ const poppins = Poppins({
   export default function Home() {
   const user = {
     username : "joaozerofive", 
-    image : "https://pbs.twimg.com/profile_images/1703547283462029312/xK9Io582_400x400.jpg", 
     biography : "Entusiasta em programação com mais de 2 anos de experiência que busca novas oportunidades no mercado de trabalho."
   }
   return (
@@ -63,43 +64,54 @@ const poppins = Poppins({
           </div>
       </div>
 
-      <div className={styles.signUp}>
+    <div className={styles.signUp}>
+
         <h1>Crie seu portifólio</h1>
 
-        <label htmlFor="username">
-           <p>Nome de usuário</p> 
-            <Input
-            id='username'
-            icon={CgProfile}
-            placeholder='usuário2005'
-            type='text'/>
-        </label>
+              <label htmlFor="username">
+                <p>Nome de usuário</p> 
+                  <Input
+                  id='username'
+                  icon={CgProfile}
+                  placeholder='usuário2005'
+                  type='text'/>
+              </label>
 
 
-        <label htmlFor="email">
-           <p>Email</p> 
-            <Input
-            id='email'
-            icon={AiOutlineMail}
-            placeholder='Ex.: usuário@email.com'
-            type='email'/>
-        </label>
+              <label htmlFor="email">
+                <p>Email</p> 
+                  <Input
+                  id='email'
+                  icon={AiOutlineMail}
+                  placeholder='Ex.: usuário@email.com'
+                  type='email'/>
+              </label>
 
-        <label htmlFor="password">
-           <p>Senha</p> 
-            <Input
-            id='password'
-            icon={RiLockPasswordLine}
-            placeholder='No mínimo 6 caracteres'
-            type='password'/>
-        </label>
+              <label htmlFor="password">
+                <p>Senha</p> 
+                  <Input
+                  id='password'
+                  icon={RiLockPasswordLine}
+                  placeholder='No mínimo 6 caracteres'
+                  type='password'/>
+              </label>
 
-          <Button
-          isLoading = {true}
-          title='Entrar' />
+              <label htmlFor="ocupation">
+                <p>Ocupação</p> 
+                  <Input
+                  id='ocupation'
+                  icon={MdComputer}
+                  placeholder='Ex.: Web Developer'
+                  type='text'/>
+              </label>
+
+                <Button
+                isLoading = {true}
+                title='Entrar' />
 
           <h1>Já sou usuário</h1>
-      </div>
+
+    </div>
       
      
 

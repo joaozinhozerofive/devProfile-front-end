@@ -1,0 +1,38 @@
+.layout{
+        .content{
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 5rem;
+
+            .texshadow{
+                margin: 0 auto;
+                color: var(--WHITE-300);
+
+                font-size: 3rem;
+            }
+            .formEdit{   
+
+                h1{
+                    font-size: 1.5rem;
+                }
+                textarea{
+                    margin-top: 2rem;
+                    width: 100%;
+
+                    height: 60vh;
+
+                    padding: 2rem;
+
+                    color: var(--WHITE-300);
+
+                    background: var(--BACKGROUND-800);
+
+                    border-radius: 0.5rem;
+
+
+                }
+            }
+    }
+}

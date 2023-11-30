@@ -2,13 +2,14 @@
 
 
 //icons
-import { FiEdit } from 'react-icons/fi'
+import {  FiEdit } from 'react-icons/fi'
 
 
 //components
 import TextShadow from '@/components/TextShadow'
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import Link from 'next/link'
+import Button from '@/components/Button'
 
 
 //styles
@@ -16,9 +17,10 @@ import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
 
 
-export default function Work(){
+export default function EditWork(){
+    const routes = useRouter()
+    const {id} = routes.query
     
-
 
     return(
         <LayoutPortfolio className={styles.layout}>
@@ -27,11 +29,18 @@ export default function Work(){
                 <div className={styles.content}>
                     <TextShadow
                     className={styles.textShadow}
-                    title='Experiência'
+                    title='Editar - Experiência'
                      />
 
 
                      <div className={styles.experience}>
+
+                        <Link href = {`/portfolio/${id}/edit/editWorks/5`}className = {styles.fiEdit}>
+
+                             <FiEdit size={20} />
+
+                        </Link>
+
                         
                 
 
@@ -41,8 +50,13 @@ export default function Work(){
                         <p>Menor aprendiz -- curso de aprendizagem industrial na área de assistente administrativo - SENAI</p>
                         <span> 01/2020 - 12/2020  </span>
 
-
                      </div>
+
+                     <Button 
+
+                        onClick={ () => routes.push(`/portfolio/${id}`)}
+                        title='Finalizar' />
+
                 </div>
                 
         </LayoutPortfolio>

@@ -1,29 +1,6 @@
 .layout{
-    main{
-        height: 100%;
-        grid-area: main;
 
-        padding: 3rem 1rem 5rem 3rem ;
-
-
-        background: var(--BACKGROUND-900);
-
-
-
-
-        a{
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-
-
-            letter-spacing: 0.1rem;
-            font-size: 2rem;
-
-
-
-            margin-bottom: 5rem;
-        }
+        
 
 
         .content{
@@ -53,10 +30,13 @@
                 font-size: 2rem;
                 line-height: 3rem;
 
-                padding-top: 10%;
+                padding: 2rem;
+
+                border-radius: 1rem;
+                border: 1px solid var(--GRAY-200);
+
+                background: var(--BACKGROUND-800);
             }
         }
     }
 
-
-}

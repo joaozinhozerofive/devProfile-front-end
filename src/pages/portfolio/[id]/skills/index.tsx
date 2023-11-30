@@ -5,13 +5,11 @@ import { useRouter } from 'next/router'
 import styles from './styles.module.scss'
 
 //icons
-import { IoArrowBackSharp } from "react-icons/io5";
-import { GrLinkNext } from "react-icons/gr";
+
 
 
 //components
 import LayoutPortfolio from '@/components/Layout Portfolio'
-import ButtonText from '@/components/ButtonText';
 import TextShadow from '@/components/TextShadow';
 import Carousel from '@/components/Carousel';
 
@@ -25,21 +23,9 @@ export default function Skills(){
     const {id}   = routes.query as { id : string | number}
 
 
-    function handleBack(){
-        routes.back()
-    }
-
-
     return(
 
         <LayoutPortfolio className={styles.layout}>
-
-            <main>
-            <ButtonText
-            onClick={() => {handleBack()}}
-            icon={IoArrowBackSharp}
-            title='Voltar'
-             />
 
              <div className={styles.content}>
 
@@ -80,7 +66,6 @@ export default function Skills(){
 
              </div>
 
-            </main>
         </LayoutPortfolio>
        
     )

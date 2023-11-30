@@ -14,7 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     icon?: IconType, 
     isLoading? : boolean,
     title? : string,
-    onCLick? :  React.MouseEvent
+    onCLick? :  () => void
 }
 
 const poppins = Poppins({
@@ -23,7 +23,7 @@ const poppins = Poppins({
     subsets : ['latin'] // obrigatório
    })
 
-   export default function ButtonText({icon : Icon, isLoading, placeholder, onClick, className,title, ...rest} : ButtonProps){
+   export default function Button({icon : Icon, isLoading, placeholder, onClick, className,title, ...rest} : ButtonProps){
     return(
         <button 
         onClick = {onClick}

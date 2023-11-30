@@ -1,0 +1,65 @@
+.layout{
+
+    
+    .content{
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 5rem;
+
+
+        .textShadow{
+            font-size: 3rem;
+           
+            margin: 0 auto;
+            margin-bottom: 10rem;
+        }
+
+
+        .experience{
+            display: flex;
+            flex-direction: column;
+
+
+            gap: 1rem;
+
+            background: var(--BACKGROUND-800);
+
+            border: 1px solid var(--GRAY-200);
+            border-radius: 0.5rem;
+
+            padding: 2rem;
+
+            position: relative;
+
+
+            margin-bottom: 2rem;
+
+            .fiEdit{
+                position: absolute;
+
+                right: 1rem;
+                top: 1rem;
+            }
+
+            p{
+                font-size: 1.2rem;
+                color: var(--GRAY-100);
+
+
+
+                display: -webkit-box;
+                -webkit-line-clamp: 5; 
+                -webkit-box-orient: vertical;
+                 overflow: hidden;
+            }
+
+
+            span{
+                font-size: 1.2rem;
+                color: var(--GRAY-200);
+            }
+
+        }
+    }
+}

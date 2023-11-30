@@ -9,10 +9,11 @@
   list-style: none;
 
 
-  transition: 0.2s;
+  transition: 0.3s;
 
 
-  font-family:  sans-serif;
+  color: var(--WHITE-300);
+
 
 }
 
@@ -22,6 +23,22 @@
 ::-webkit-scrollbar-thumb{
   background: var(--BACKGROUND-1000);
   border-radius: 5rem;
+}
+
+
+input{
+  border: none;
+}
+
+
+textarea{
+  padding: 1rem;
+  background: var(--BACKGROUND-800);
+  border: none;
+  border-radius: 0.5rem;
+
+
+  resize: none;
 }
 
 
@@ -54,6 +71,10 @@
 
 
   font-size: 62.5%;
+}
+
+.hidden{
+  display: none;
 }
 
 main{

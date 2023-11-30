@@ -12,6 +12,16 @@
     padding: 2rem;
 
     border-radius: 1rem;
+    border: 1px solid var(--GRAY-200);
+
+    position: relative;
+
+    .fiEdit{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
 
     .textShadow{
         color: var(--WHITE-300);

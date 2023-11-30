@@ -2,20 +2,23 @@
 import { useRouter } from 'next/router'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head';
+import { HTMLAttributes, ReactNode } from 'react';
 
 //styles 
 import styles from './styles.module.scss'
 
+//assets
+import logotipoWhatsApp from '../../../public/logoWhatsApp.png'
 
 //icons
-
+import { IoArrowBackSharp } from "react-icons/io5";
 
 //components
-import Button from '@/components/Button'
 import Footer from '@/components/Footer'
 import Brand from '@/components/Brand'
 import Menu from '@/components/Menu'
-import { HTMLAttributes, ReactNode } from 'react';
+import Image from 'next/image';
+import ButtonText from '../ButtonText';
 
 //interfaces
 interface LayoutPortfolioProps extends HTMLAttributes<HTMLDivElement>{
@@ -30,8 +33,10 @@ const roboto = Roboto({
    })
 
 export default function LayoutPortfolio({children, className, ...rest} : LayoutPortfolioProps){
-    const {query} = useRouter()
-    const id = query?.id
+    const routes = useRouter()
+    const {id} = routes.query as {id : string}
+
+
     return (
 
         <>
@@ -41,17 +46,32 @@ export default function LayoutPortfolio({children, className, ...rest} : LayoutP
             <title>Dev Profile - joaozerofive</title>
         </Head>
         
-<div className={`${styles.page} ${roboto.className} ${className}`}>
+<div className={`${styles.layoutContainer} ${roboto.className} ${className}`}>
+
 
 
         <Brand className={styles.brand}/>
 
-        
+
+        <main>
+
+            <ButtonText
+            onClick={() => routes.back()}
+            icon={IoArrowBackSharp}
+             title='Voltar'/>
             {children}
 
+            <Image
+            className={styles.logotipoWhats}
+             src={logotipoWhatsApp} 
+             alt='ogotipo WhatsApp'/>
+        </main>
         
 
         <Menu  />
+
+
+        
 
         <Footer />
 
