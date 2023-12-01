@@ -1,11 +1,18 @@
 .layout{
+
+    
     main{
+
             
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: left;
         gap: 3rem;
+
+
+        button{
+            display: none;
+        }
 
 
         padding: 3rem 1rem 5rem 3rem ;
@@ -37,6 +44,10 @@
      
 
         .button{
+            display: block;
+            
+            margin: 0;
+
             background: none;
 
             border: 1px solid var(--GREEN-500);
@@ -44,12 +55,10 @@
 
             color: var(--GREEN-500);
 
-
             min-width: 20rem;
 
 
             max-width: 30rem;
-
 
             letter-spacing: 0.3rem;
 

@@ -69,11 +69,11 @@ const poppins = Poppins({
         <h1>Crie seu portifólio</h1>
 
               <label htmlFor="username">
-                <p>Nome de usuário</p> 
+                <p>Nome Completp</p> 
                   <Input
                   id='username'
                   icon={CgProfile}
-                  placeholder='usuário2005'
+                  placeholder='John Doe'
                   type='text'/>
               </label>
 

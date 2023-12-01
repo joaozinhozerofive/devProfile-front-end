@@ -6,6 +6,8 @@ import styles from './styles.module.scss'
 import { FaWhatsapp } from "react-icons/fa";
 import { CiLinkedin } from 'react-icons/ci';
 import { GrGithub } from 'react-icons/gr';
+import { AiOutlineMail } from "react-icons/ai";
+
 
 
 
@@ -28,8 +30,9 @@ import { useRouter } from 'next/router';
 
 export default function Edit(){
     const routes = useRouter()
+    const {id} = routes.query as {id : string | number}
 
-    const {id} = routes.query;
+    
     return(
         <LayoutPortfolio className={styles.layout}>
 
@@ -38,7 +41,7 @@ export default function Edit(){
 
                 <TextShadow 
                 className={styles.textShadow} 
-                title='Editar - Links' />
+                title='Editar - Contato' />
 
                 
                 <Form className={styles.formEdit}>
@@ -66,6 +69,15 @@ export default function Edit(){
                         <Input
                         icon={GrGithub}
                         placeholder='https://github.com/(seu nome de usuário)'
+                        className={styles.input}
+                        type='text' />
+                    </label>
+                    <label>
+
+                        Email
+                        <Input
+                        icon={AiOutlineMail}
+                        placeholder='Escreva um email de uso'
                         className={styles.input}
                         type='text' />
                     </label>

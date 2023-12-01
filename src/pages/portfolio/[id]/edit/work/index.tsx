@@ -1,4 +1,6 @@
 //utils 
+import {useState} from 'react';
+
 
 
 //icons
@@ -17,7 +19,11 @@ import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
 
 
+
+
 export default function EditWork(){
+    
+
     const routes = useRouter()
     const {id} = routes.query
     

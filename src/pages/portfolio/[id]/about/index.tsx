@@ -29,7 +29,6 @@ const mulish = Mulish({
 
 export default function About(){
     const routes = useRouter();
-    const {id}   = routes.query as { id : string | number}
 
 
 

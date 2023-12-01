@@ -17,6 +17,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     onChange ? : ChangeEventHandler,
     value? : string | number
     maxLength? : number
+    id ? : string
 }
 
 const poppins = Poppins({
@@ -26,7 +27,7 @@ const poppins = Poppins({
    })
 
 
-export default function Input({icon : Icon, type, value, isLoading, placeholder, maxLength, className, onChange, ...rest} : InputProps){
+export default function Input({icon : Icon, type, id, value, isLoading, placeholder, maxLength, className, onChange, ...rest} : InputProps){
     return(
 
         <div className={`${styles.input} ${className} `} >
@@ -34,6 +35,7 @@ export default function Input({icon : Icon, type, value, isLoading, placeholder,
             {Icon && <Icon color='gray' size={20} />}
 
             <input
+             id={id}
              maxLength={maxLength}
              value={value}
              onChange={onChange}

@@ -22,8 +22,8 @@ import { useRouter } from 'next/router'
 
 export default function EditSkills(){
     const routes = useRouter()
+    const {id}   = routes.query as { id : string | number}
 
-    const {id} = routes.query as {id: string}
     return(
         <LayoutPortfolio className={styles.layout}>
 

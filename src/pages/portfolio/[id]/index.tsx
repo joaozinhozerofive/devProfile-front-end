@@ -21,8 +21,7 @@ const roboto = Roboto({
    })
 
 export default function Portfolio(){
-    const {query} = useRouter()
-    const id = query?.id
+    const routes = useRouter();
     return (
 
         <>
@@ -35,7 +34,6 @@ export default function Portfolio(){
 
 <LayoutPortfolio className={styles.layout}>
 
-        <main>
             <h1>Olá, <br /> meu nome é João, <br /> Desenvolvedor Web Full Stack</h1>
 
             <p>Web Developer Full Stack</p>
@@ -45,7 +43,7 @@ export default function Portfolio(){
             isLoading = {false}
             title='Fale comigo!'
             />
-        </main>
+
 
 
 

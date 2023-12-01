@@ -1,5 +1,7 @@
 //utils 
+import {useState, ChangeEvent, useEffect} from 'react'
 import { useRouter } from 'next/router'
+
 
 //styles 
 import styles from './styles.module.scss'
@@ -15,7 +17,36 @@ import Button from '@/components/Button'
 
 
 
-export default function newWork(){
+
+
+export default function EditWork(){
+    const [startDate, setStartDate] = useState<string>('')
+    const [endDate, setEndDate] = useState<string>('')
+
+    useEffect(() =>{
+        async function loadJquery(){
+            const $ = (await import('jquery')).default;
+
+            const {mask} = await import ('jquery-mask-plugin')
+
+
+            $(document).ready(function (){
+                $('#startDate').mask('00/00/0000')
+            })
+
+            $(document).ready(function (){
+                $('#endDate').mask('00/00/0000')
+            })
+        }
+
+        loadJquery()
+
+    }, [])
+    
+
+   
+
+
     const routes = useRouter()
     const {id} = routes.query;
 
@@ -50,13 +81,12 @@ export default function newWork(){
                         <Input
                         className={styles.input}
                         placeholder='Ex.: Rio do Sul'
-                        type='text'
+                        type='string'
                         />
 
                     </label>
                     <label>
                         UF
-
                         <Input
                         className={styles.input}
                         maxLength={3}
@@ -78,9 +108,12 @@ export default function newWork(){
                         Início
 
                         <Input
+                        id='startDate'
+                        value={startDate}
+                        onChange={(e : ChangeEvent<HTMLInputElement>) => setStartDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
-                        type='date'
+                        type='string'
                         />
 
                     </label>
@@ -90,9 +123,12 @@ export default function newWork(){
                         Término
 
                         <Input
+                        id='endDate'
+                        value={endDate}
+                        onChange={(e : ChangeEvent<HTMLInputElement>) => setEndDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
-                        type='date'
+                        type='string'
                         />
 
                     </label>
@@ -122,10 +158,10 @@ export default function newWork(){
                     onClick={ () => routes.back()}
                     title='Salvar' />
 
-                <Button 
-                className={styles.delete}
-                onClick={ () => routes.back()}
-                title='Excluir' />
+                    <Button 
+                    className={styles.delete}
+                    onClick={ () => routes.back()}
+                    title='Excluir' />
 
 
             </Form>

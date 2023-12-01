@@ -31,8 +31,8 @@ interface UserProps{
  
  export default function Menu({className, user, ...rest} : MenuProps){
      
-     const routes = useRouter();
-     const {id}   = routes.query as { id : string }
+   const routes = useRouter()
+   const {id}   = routes.query as { id : string | number}
 
 
      function pathNameIncludes(path : string ){

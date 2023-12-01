@@ -15,7 +15,8 @@ import { useRouter } from 'next/router'
 export default function EditAbout(){
     const routes = useRouter()
 
-    const {id} = routes.query 
+    const {id}   = routes.query as { id : string | number}
+
     return(
         <LayoutPortfolio className={styles.layout}>
 

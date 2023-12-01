@@ -34,7 +34,7 @@ const roboto = Roboto({
 
 export default function LayoutPortfolio({children, className, ...rest} : LayoutPortfolioProps){
     const routes = useRouter()
-    const {id} = routes.query as {id : string}
+    
 
 
     return (
@@ -59,12 +59,15 @@ export default function LayoutPortfolio({children, className, ...rest} : LayoutP
             onClick={() => routes.back()}
             icon={IoArrowBackSharp}
              title='Voltar'/>
+
+
             {children}
 
             <Image
             className={styles.logotipoWhats}
              src={logotipoWhatsApp} 
              alt='ogotipo WhatsApp'/>
+
         </main>
         
 

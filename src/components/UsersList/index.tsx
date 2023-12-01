@@ -1,3 +1,8 @@
+
+//utils 
+import { useRouter } from 'next/router'
+
+//assets
 import avatarUrl from '../../../public/avatarUrl.png'
 import Image from 'next/image'
 
@@ -29,6 +34,9 @@ const roboto = Roboto({
 })
 
 export default function UsersList({user, className, ...rest} : UserListProps){
+    const routes = useRouter()
+    const {id} = routes.query as {id : string | number}
+
     return(
 
             <div className={`${className} ${styles.main} ${roboto.className}`}>

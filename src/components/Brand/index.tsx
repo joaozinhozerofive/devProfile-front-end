@@ -33,7 +33,7 @@ export default function Brand({ className, user, ...rest } : BrandProps){
             <h3>João</h3>
 
 
-            <p>Web Developer</p>
+            <p>emaail</p>
 
         </div>
 
