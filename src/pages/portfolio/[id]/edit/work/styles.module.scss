@@ -21,6 +21,11 @@
             flex-direction: column;
 
 
+            
+            width: 70rem;
+            max-width: 100%;
+
+
             gap: 1rem;
 
             background: var(--BACKGROUND-800);
@@ -33,7 +38,7 @@
             position: relative;
 
 
-            margin-bottom: 2rem;
+            margin : 2rem auto;
 
             .fiEdit{
                 position: absolute;

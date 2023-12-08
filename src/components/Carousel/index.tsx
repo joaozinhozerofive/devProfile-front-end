@@ -8,27 +8,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from 'swiper/modules';
+import { GetServerSideProps } from 'next';
+import { api } from '@/services/api';
 
-export default function Carousel(){
+
+
+export default function Carousel({data} ){
+
+
+    console.log(data)
     return(
         <div className={styles.carouselContainer}>
         <Swiper
         touchRatio={0.5}
         speed={1000}
         slidesPerView={1.2}
-        spaceBetween={10}
+        spaceBetween={60}
         modules={[ Navigation]}
         
      >
-      <SwiperSlide className={styles.swiperContainer}  >
-            <ProjectCards />
+      {data && data.map(project => (
+      <SwiperSlide key={project.id} className={styles.swiperContainer}  >
+            <ProjectCards
+            project={project}
+             />
         </SwiperSlide>
-      <SwiperSlide className={styles.swiperContainer}  >
-            <ProjectCards />
-        </SwiperSlide>
-      <SwiperSlide className={styles.swiperContainer}  >
-            <ProjectCards />
-        </SwiperSlide>
+
+      ))}  
+      
       
 
 
@@ -38,3 +45,5 @@ export default function Carousel(){
 
     )
 }
+
+

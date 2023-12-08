@@ -1,7 +1,8 @@
 //utils 
 import {useState, ChangeEvent, useEffect} from 'react'
 import { useRouter } from 'next/router'
-
+import { api } from '@/services/api'
+import { GetServerSideProps } from 'next'
 
 //styles 
 import styles from './styles.module.scss'
@@ -14,14 +15,34 @@ import Form from '@/components/Form'
 import TextShadow from '@/components/TextShadow'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
+import { toast } from 'react-toastify'
+
+
+interface WorkProps{
+    companyName : string
+    city : string
+    FU: string
+    startDate : string
+    endDate : string
+    description : string
+}
 
 
 
 
-
-export default function EditWork(){
+export default function EditWork({work_id}){
+    const [companyName, setCompanyName] = useState<string>('')
+    const [city, setCity] = useState<string>('')
+    const [FU, setFU] = useState<string>('')
     const [startDate, setStartDate] = useState<string>('')
     const [endDate, setEndDate] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+
+    const [isCurrent, setIsCurrent] = useState<boolean>(false)
+
+    const routes = useRouter()
+
+    console.log(work_id)
 
     useEffect(() =>{
         async function loadJquery(){
@@ -41,14 +62,43 @@ export default function EditWork(){
 
         loadJquery()
 
+        
+
     }, [])
+
+
+    useEffect(()=>{
+
+        async function fetchWorks(){
+            try{
+                const response = await api.get(`/experience/${work_id}/detail`)
+                const data = response.data
+
+                setCompanyName(data.companyName)
+                setCity(data.city)
+                setFU(data.FU)
+                setStartDate(data.startDate)
+                setEndDate(data.endDate)
+                setDescription(data.description)
+
+                
+            }catch(error){
+                if(error.response?.data?.message){
+                    toast.error(error.response.data.message)
+                }
+            }
+
+
+        }
+
+        fetchWorks()
+
+
+    }, [work_id])
+
     
 
-   
 
-
-    const routes = useRouter()
-    const {id} = routes.query;
 
     return (
         <LayoutPortfolio>
@@ -63,6 +113,8 @@ export default function EditWork(){
                 <label>
                     Nome da empresa
                     <Input
+                    value={companyName}
+                    onChange={e => setCompanyName(e.target.value)}
                     className={styles.input}
                     placeholder='Ex.: Udemy Tecnologia'
                     type='text'
@@ -79,6 +131,8 @@ export default function EditWork(){
                         Cidade
 
                         <Input
+                        value={city}
+                        onChange={e => setCity(e.target.value)}
                         className={styles.input}
                         placeholder='Ex.: Rio do Sul'
                         type='string'
@@ -88,6 +142,8 @@ export default function EditWork(){
                     <label>
                         UF
                         <Input
+                        value={FU}
+                        onChange={e => setFU(e.target.value)}
                         className={styles.input}
                         maxLength={3}
                         placeholder='Ex.: SC'
@@ -110,7 +166,7 @@ export default function EditWork(){
                         <Input
                         id='startDate'
                         value={startDate}
-                        onChange={(e : ChangeEvent<HTMLInputElement>) => setStartDate(e.target.value)}
+                        onChange={(e) => setStartDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
                         type='string'
@@ -125,7 +181,7 @@ export default function EditWork(){
                         <Input
                         id='endDate'
                         value={endDate}
-                        onChange={(e : ChangeEvent<HTMLInputElement>) => setEndDate(e.target.value)}
+                        onChange={(e) => setEndDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
                         type='string'
@@ -140,6 +196,8 @@ export default function EditWork(){
                     <label className={styles.checkbox} htmlFor="checkbox ">
                         Emprego atual
                         <input 
+                        onChange={e => setIsCurrent(e.target.checked)}
+                        checked = {isCurrent}
                         id='checkbox'
                         type="checkbox" />
 
@@ -148,7 +206,11 @@ export default function EditWork(){
                 <label>
                         Descrição da atividade
 
-                        <textarea placeholder='Ex.: Assistente financeiro - conferência de balancetes, etc..'></textarea>
+                        <textarea
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                         placeholder='Ex.: Assistente financeiro - conferência de balancetes, etc..'>
+                         </textarea>
 
                     </label>
 
@@ -172,3 +234,32 @@ export default function EditWork(){
         </LayoutPortfolio>
     )
 }
+
+interface Props{
+    work_id : string | string []
+}
+
+
+export const getServerSideProps : GetServerSideProps<Props> = async (ctx) =>{
+    try{
+        const {work_id} = ctx.query;
+
+
+        return {
+            props : {
+                work_id : work_id,
+            }
+        }
+
+    }catch(error){
+        console.error(error)
+
+        return {
+            props : {
+                work_id : null
+            }
+        }
+    }
+}
+
+

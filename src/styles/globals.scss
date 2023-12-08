@@ -19,9 +19,10 @@
 
 ::-webkit-scrollbar{
   width: 0.5rem;
+  height: 1.2rem;
 }
 ::-webkit-scrollbar-thumb{
-  background: var(--BACKGROUND-1000);
+  background: var(--BLACK-100);
   border-radius: 5rem;
 }
 
@@ -68,6 +69,7 @@ textarea{
 
 
   --PINK-100 : rgb(212, 57, 83);
+
 
 
   font-size: 62.5%;
@@ -118,7 +120,7 @@ input{
 
 //hover
 button:hover{
-  scale: 1.1;
+  scale: 1.05;
 }
 
 a:hover{

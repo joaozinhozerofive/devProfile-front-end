@@ -9,15 +9,10 @@ import Loading  from '../Loading';
 
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{ 
-    className? : string,
     icon?: IconType, 
-    type : string,
-    isLoading? : boolean,
-    placeholder? : string,
-    onChange ? : ChangeEventHandler,
-    value? : string | number
-    maxLength? : number
     id ? : string
+    isLoading? : boolean,
+    className? : string,
 }
 
 const poppins = Poppins({
@@ -27,7 +22,7 @@ const poppins = Poppins({
    })
 
 
-export default function Input({icon : Icon, type, id, value, isLoading, placeholder, maxLength, className, onChange, ...rest} : InputProps){
+export default function Input({icon : Icon, id, isLoading, className, ...rest} : InputProps){
     return(
 
         <div className={`${styles.input} ${className} `} >
@@ -35,13 +30,9 @@ export default function Input({icon : Icon, type, id, value, isLoading, placehol
             {Icon && <Icon color='gray' size={20} />}
 
             <input
+            {...rest}
              id={id}
-             maxLength={maxLength}
-             value={value}
-             onChange={onChange}
              className={`${poppins.className} `}
-             placeholder={placeholder}
-             type={type}
              />
 
             {isLoading ? <Loading/> : "" }

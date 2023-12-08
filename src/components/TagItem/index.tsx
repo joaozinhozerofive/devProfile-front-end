@@ -16,13 +16,9 @@ import { Poppins } from 'next/font/google'
 
 
 interface TagItemProps extends InputHTMLAttributes<HTMLInputElement>{
-value? : string, 
 className? : string,
 isNew? : boolean, 
-onChange? : ChangeEventHandler,
-placeholder? : string,
-
-
+onClick ? : () => void
 }
 
 
@@ -33,17 +29,15 @@ const poppins = Poppins({
    })
 
 
-export default function TagItem({ value, className, isNew, placeholder, onChange, ...rest} :  TagItemProps){
+export default function TagItem({  className, isNew, onClick, ...rest} :  TagItemProps){
 
 
     return(
         <div className={`${ isNew ? styles.isNew : styles.tagItem} ${className}`}>
 
             <input 
-            placeholder={placeholder}
-            value={value}
+            {...rest}
             className={`${poppins.className} `}
-            onChange={onChange}
             readOnly = {isNew ? false : true}
             type="text"
              />
@@ -52,10 +46,12 @@ export default function TagItem({ value, className, isNew, placeholder, onChange
 
                 {isNew ? 
                     <FiPlus
+                    onClick = {onClick}
                     color = 'gray'
                     type = 'button'/> 
                     : 
                     <FiX
+                    onClick = {onClick}
                     color = 'red'
                     type = 'button'/>
                 }

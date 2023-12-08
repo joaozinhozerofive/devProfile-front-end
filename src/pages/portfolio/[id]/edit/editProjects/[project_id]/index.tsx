@@ -1,5 +1,7 @@
 //utils
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
+import {useState} from 'react'
+import { useEffect } from 'react';
 
 //styles
 import styles from './styles.module.scss'
@@ -19,11 +21,165 @@ import Input from '@/components/Input'
 import Form from '@/components/Form'
 import TagItem from '@/components/TagItem'
 import Button from '@/components/Button'
+import { GetServerSideProps } from 'next';
+import { api } from '@/services/api';
+import { toast } from 'react-toastify';
 
-export default function EditProjects(){
+interface TechnologiesProps{
+    name : string
+}
 
+
+
+interface ProjectsProps {
+    name? : string 
+    img?: string
+    description? : string
+    link?: string
+    technologies?: TechnologiesProps[]
+}
+
+export default function EditProjects({project_id}){
+    const [ data, setData] = useState<ProjectsProps>({})
+    const [name, setName] = useState<string>('')
+    const [img, setImg] = useState<File | string>('')
+    const [description, setDescription] = useState<string>('')
+    const [link, setLink] = useState<string>('')
+    const [technologies, setTechnologies] = useState<TechnologiesProps[]>()
+    const [newTechnologie, setNewTechnologie] = useState<string>('')
+
+    const [imagePreview, setImagePreview] = useState<string | undefined>()
+    const [buttonLoading, setButtonLoading] = useState(false)
+
+    
     const routes = useRouter()
-    const {id}   = routes.query as { id : string | number}
+
+    console.log(data)
+   
+    useEffect(() =>{
+        async function fetchProject(){
+            try{
+
+                const response = await api.get(`/projects/${project_id}/detail`)
+                const projectData = response.data
+                setData(projectData)
+
+
+                setName(projectData.name)
+                setImg(projectData.img)
+                setDescription(projectData.description)
+                setLink(projectData.link)
+                setTechnologies(projectData.technologies)
+                setImagePreview(`${api.defaults.baseURL}/files/${projectData.img}`)
+
+            }catch(error){
+                if(error.response.data.message){
+                    toast.error(error.response.data.message)
+                }
+            }
+        }
+
+        fetchProject()
+
+    }, [project_id])
+
+
+
+
+
+    function NewTechnologie(){
+        setTechnologies(technologies => [...technologies,  {name : newTechnologie} ])
+        setNewTechnologie('')
+    }
+
+
+    function RemoveTechnologie(name : string){
+        
+        const technologiesFiltered = technologies.filter(technologies => technologies.name !== name)
+
+
+        setTechnologies(technologiesFiltered)
+    }
+
+
+    async function HandleChangeImgProject(e){
+        const file = e.target.files[0]
+
+
+        setImg(file)
+
+        const imagePreview  = URL.createObjectURL(file)
+
+
+        setImagePreview(imagePreview)
+    }
+
+
+    async function HandleNewProject(){
+        setButtonLoading(true)
+        try{
+
+            const formData = new FormData()
+            formData.append("img", img)
+            formData.append("name", name)
+            formData.append("description", description)
+            formData.append("link", link)
+
+            const newTechs = technologies.map(technologie => {
+                formData.append("technologies", technologie.name)
+            })
+
+            console.log(newTechs)
+
+            await api.put(`/projects/${project_id}`, formData)
+
+            toast.success("Projeto atualizado com sucesso")
+
+            routes.back()
+
+        }catch(error){
+            if(error.response?.data?.message){
+                toast.error(error.response.data.message)
+            }else{
+                toast.error("Não foi possível atualizar este projeto")
+            }
+
+        }finally{
+            setTimeout(() =>{
+
+                setButtonLoading(false)
+                
+            }, 500)
+        }
+    }
+
+    async function handleDeleteProject(){
+        setButtonLoading(true)
+
+        try{
+
+            await api.delete(`/projects/${project_id}`)
+            toast.success("Projeto deletado com sucesso!!")
+
+            routes.back()
+            
+        }catch(error){
+
+            if(error.response.data.message){
+                toast.error(error.response.data.message)
+            }else{
+                toast.error("Não foi possível excluir este projeto")
+            }
+
+        }finally{
+            setTimeout(() =>{
+
+                setButtonLoading(false)
+                
+            }, 500)
+        }
+    }
+
 
     return (
         <LayoutPortfolio className={styles.layout}>
@@ -43,6 +199,8 @@ export default function EditProjects(){
             <label>
                 Nome do projeto
                 <Input 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder='Ex.: Loja de roupas'
                 className={styles.input}
                 type='text' />
@@ -51,20 +209,29 @@ export default function EditProjects(){
 
 
             <div className={styles.projectImg}>
-                <Image
-                src={exampleImage} 
-                alt='Imagem do projeto' />
-     <div 
-    className={styles.newImage}
-    >
+                    <Image
+                            className={styles.imagePreview}
+                            src={imagePreview}
+                            alt='Imagem do projeto'
+                            layout='responsive'
+                             height={0} 
+                             width={0} 
+                             />              
+                    
+                <div className={styles.newImage}>
+                    
+                    
+                        <Input
+                        name='img'
+                        onChange={e => HandleChangeImgProject(e)}
+                        className={styles.input} 
+                        type='file'/>
 
-        <Input
-         className={styles.input} 
-        type='file'/>
 
-        <MdAddAPhoto size = {20} className = {styles.iconImage}/>
 
-     </div>
+                        <MdAddAPhoto size = {20} className = {styles.iconImage}/>
+
+                </div>
 
 
             </div>
@@ -73,18 +240,37 @@ export default function EditProjects(){
             <label>
                 Descrição do projeto
                 
-                <textarea placeholder='Seja breve, escreva as funcionalidades e como funciona o projeto'></textarea>
+                <textarea 
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                placeholder='Seja breve, escreva as funcionalidades e como funciona o projeto'>
+                </textarea>
 
             </label>
             
-            <label>
+            <label >
                 Tecnologias usadas
-                    <TagItem
+
+                <div className={styles.technologies}>
+
+
+                    {technologies && technologies.map((technologie, index) => (
+                     <TagItem
+                    onClick={() => RemoveTechnologie(technologie.name)}
+                    key={String(index)}
+                    value={technologie.name}              
                     />
+
+                               ))} 
                     <TagItem
+                    onClick={() => NewTechnologie()}
+                    onChange={(e) => setNewTechnologie(e.target.value)}
+                    value={newTechnologie}
                     isNew 
                     placeholder='Adicionar'
-                    />
+                    /> 
+
+                </div>               
 
             </label>
 
@@ -92,19 +278,22 @@ export default function EditProjects(){
             <label>
                 Link do projeto
                 <Input
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
                 placeholder='Cole o link do seu projeto'
                 className={styles.input}
                 type='text'/>
             </label>
 
 
-            <Button
-            onClick={ () => routes.back()}
-            title='Salvar' />
+                <Button
+                isLoading = {buttonLoading}
+                onClick={ () => HandleNewProject()}
+                title='Salvar' />
 
                 <Button 
                 className={styles.delete}
-                onClick={ () => routes.back()}
+                onClick={ () => handleDeleteProject()}
                 title='Excluir' />
 
 
@@ -114,3 +303,31 @@ export default function EditProjects(){
 </LayoutPortfolio>
     )
 }
+interface Props{
+    project_id : string | string []
+}
+
+export const getServerSideProps : GetServerSideProps<Props> = async (ctx) =>{
+        try{
+            const {project_id} = ctx.query;
+
+
+            return {
+                props : {
+                    project_id : project_id
+                }
+            }
+
+        }catch(error){
+            console.error(error)
+
+            return {
+                props : {
+                    project_id : null
+                }
+            }
+        }
+}
+
+
+

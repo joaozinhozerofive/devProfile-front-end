@@ -1,3 +1,10 @@
+//utils
+import { useRouter } from 'next/router'
+import type { GetServerSideProps } from 'next';
+import { SyntheticEvent, useState } from 'react'
+import { api } from '@/services/api'
+import { toast } from 'react-toastify'
+
 //styles 
 import styles from './styles.module.scss'
 
@@ -17,17 +24,111 @@ import Input from '@/components/Input'
 import Form from '@/components/Form'
 import TagItem from '@/components/TagItem'
 import Carousel from '@/components/Carousel'
-import { useRouter } from 'next/router'
 
 
-export default function EditSkills(){
+interface TechnologiesProps{
+    name? : string
+}
+
+
+
+interface ProjectProps{
+    id : number
+    name : string
+    img? : string
+    description : string
+    link : string
+    technologies : TechnologiesProps[] 
+}
+
+
+
+interface EditSkillsProps{
+    projectsData : ProjectProps[]
+    technologiesData : TechnologiesProps[]
+}
+
+
+export default function EditSkills({ technologiesData, projectsData } : EditSkillsProps ){
+    const [technologies, setTechnologies] = useState<TechnologiesProps[]>(technologiesData)
+    const [newTechnologie, setNewTechnologie] = useState<string>('')
+    const [buttonLoading, setButtonLoading] = useState(false)
     const routes = useRouter()
     const {id}   = routes.query as { id : string | number}
 
+
+    console.log(id)
+
+
+    const data = [
+        {   
+            id : 4,
+            name : "teste",
+            description : "hahahaaha", 
+            link : "string"
+        }
+    ]
+
+    function handleKeyDown(event) {
+        if(event.key === 'Enter'){
+            NewTechnologie()
+        }
+    }
+
+    function NewTechnologie(){
+        if(!newTechnologie){
+            toast.warn("Você não tem nenhuma tecnologia para adicionar")
+        }
+        
+        setTechnologies(prevState => [...prevState,  {name : newTechnologie} ])
+        setNewTechnologie('')
+    }
+
+
+    function RemoveTechnologie(name : string){
+        
+        const technologiesFiltered = technologies.filter(technologies => technologies.name !== name)
+
+
+        setTechnologies(technologiesFiltered)
+    }
+
+
+
+    async function HandleAddTechnologies(){
+        setButtonLoading(true)
+
+        if(newTechnologie){
+            toast.warn("Ops... Salve todos os campos de tecnologias")
+        }
+
+        try{    
+            await api.put("/technologies", {technologies})
+
+           toast.success("Tecnologias salvas com sucesso.")
+
+        }catch(error){
+            if(error.response.data.message){
+
+                toast.error(error.response.data.message)
+            }else{
+                toast.error("Não foi possível salvar as tecnologias.")
+            }
+        }finally{
+            setTimeout(() => {
+             setButtonLoading(false)
+
+            }, 500)
+
+        }
+    }
+
+
+   
     return(
         <LayoutPortfolio className={styles.layout}>
 
-                <div className={styles.content}>
+            <div className={styles.content}>
 
                     <TextShadow
                     className={styles.textshadow}
@@ -41,10 +142,21 @@ export default function EditSkills(){
                         
                             Tecnologias
                             <div className={styles.technologies}>
-                                <TagItem
-                                />
+
+                               {technologies && technologies.map((technologie, index) => (
+                                   <TagItem 
+                                    onClick={() => RemoveTechnologie(technologie.name)}
+                                   key={String(index)}
+                                   value={technologie.name}
+                                   />
+
+                               ))} 
 
                                 <TagItem
+                                onClick={() => NewTechnologie()}
+                                onChange={(e) => setNewTechnologie(e.target.value)}
+                                onKeyDown={(e) => handleKeyDown(e)}
+                                value={newTechnologie}
                                 isNew 
                                 placeholder='Adicionar'
                                 />
@@ -57,10 +169,17 @@ export default function EditSkills(){
                     </Form>
 
 
+                    <Button 
+                    isLoading = {buttonLoading}
+                    onClick={() => HandleAddTechnologies()}
+                    className={styles.button}
+                    title='Salvar technologies' />    
+
+
             </div>
 
             
-            <Carousel />
+            <Carousel data = {projectsData} />
 
             <Button 
             onClick={ () => routes.push(`/portfolio/${id}/edit/work`)}
@@ -71,5 +190,38 @@ export default function EditSkills(){
 
         </LayoutPortfolio>
     )
+}
+
+
+
+
+
+export const getServerSideProps: GetServerSideProps<EditSkillsProps> = async (ctx) =>{
+    try{
+        const {id} = ctx.query;
+        const projectResponse = await api.get(`/projects/${id}`)
+        const projectsData = projectResponse.data
+
+        const technologiesResponse = await api.get(`/technologies/${id}`)
+        const technologiesData = technologiesResponse.data
+
+
+        return{
+            props : {
+                technologiesData : technologiesData || [],
+                projectsData : projectsData || []
+            }
+        }
+
+    }catch(error){
+        console.log("error" + error)
+
+        return{
+            props : {
+                technologiesData : [],
+                projectsData : []
+            }
+        }
+    }
 }
 

@@ -1,6 +1,6 @@
 
 //utils 
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 
 //assets
 import avatarUrl from '../../../public/avatarUrl.png'
@@ -15,13 +15,13 @@ import styles from './styles.module.scss'
 
 //interfaces
 interface User{
-    username: string, 
-    image? : string, 
-    biography? : string
+    id : number
+    name: string, 
+    ocupation : string
 }
 
 interface UserListProps{
-    user: User,
+    users: User[],
     className? : string
 }
 
@@ -33,26 +33,29 @@ const roboto = Roboto({
     subsets : ['latin'] 
 })
 
-export default function UsersList({user, className, ...rest} : UserListProps){
-    const routes = useRouter()
-    const {id} = routes.query as {id : string | number}
+export default function UsersList({users, className, ...rest} : UserListProps){
 
     return(
 
-            <div className={`${className} ${styles.main} ${roboto.className}`}>
-                <Image 
-                className={styles.imageList} 
-                src={user.image ? user.image : avatarUrl} 
-                alt='Imagem do usuário' />
-            <div>
+    <div className={`${className} ${styles.main} ${roboto.className}`}>
 
-                    <h1>{user.username}</h1>
-                    <p>{user.biography}</p>
+    <div>
 
+       
+               {users  && users.map(user => (
+
+                <div
+                 onClick={() => Router.push(`/portfolio/${user.id}`)}
+                 key={user.id}
+                 className={styles.infoUser} >
+
+                    <h1>{user.name}</h1>    
+                    <p>{user.ocupation}</p>
+
+                </div>    
+
+                    ))}
         </div>
-
-        
-
     </div>
     )
 }

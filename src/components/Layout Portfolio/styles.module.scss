@@ -58,22 +58,10 @@
 }
 
 
-@media(min-width: 375px){
-
-    .layoutContainer{
-        main{
-            .logotipoWhats{
-        
-                bottom: 8%;
-            }
-        }
-    }
-    
-}
 @media(min-width: 768px){
     .layoutContainer{
     grid-template-columns: minmax(15rem, 18rem) ;
-    grid-template-rows: minmax(12rem, 18rem) minmax(40rem, 100vh);
+    grid-template-rows: minmax(18rem, 22rem) minmax(40rem, 100vh);
 
     main{
         .logotipoWhats{

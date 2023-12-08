@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: 'pbs.twimg.com',
         port: '',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3030',
+      },
     ],
   }
 }

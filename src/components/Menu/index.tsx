@@ -1,3 +1,6 @@
+ //utils
+ import { useAuth } from '@/hook/AuthContext';
+ 
  //estilização
  import styles from './styles.module.scss'
 
@@ -5,7 +8,7 @@
  import { FaGithub } from "react-icons/fa";
  import { CiLinkedin } from "react-icons/ci";
  import { FiEdit2 } from "react-icons/fi";
- import { FiPlus } from 'react-icons/fi';
+ import { FiPlus, FiLogOut } from 'react-icons/fi';
 
  //components
  import Link from 'next/link';
@@ -30,9 +33,9 @@ interface UserProps{
  
  
  export default function Menu({className, user, ...rest} : MenuProps){
-     
    const routes = useRouter()
    const {id}   = routes.query as { id : string | number}
+   const {signOut} = useAuth();
 
 
      function pathNameIncludes(path : string ){
@@ -95,6 +98,10 @@ interface UserProps{
 
                   <p> <FiPlus/> Nova experiência</p>
                </Link>
+
+               <p onClick={() => signOut()}>
+                  <FiLogOut size={25}/>
+               </p>
                 
 
 

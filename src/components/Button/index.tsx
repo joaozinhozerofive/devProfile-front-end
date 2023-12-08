@@ -23,10 +23,10 @@ const poppins = Poppins({
     subsets : ['latin'] // obrigatório
    })
 
-   export default function Button({icon : Icon, isLoading, placeholder, onClick, className,title, ...rest} : ButtonProps){
+   export default function Button({icon : Icon, isLoading, className,title, ...rest} : ButtonProps){
     return(
         <button 
-        onClick = {onClick}
+        {...rest}
         type='button'
         disabled={isLoading} 
         className={`${className} ${styles.button} ${poppins.className}`} 
