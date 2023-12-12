@@ -1,31 +1,50 @@
 //utils 
 import { useRouter } from 'next/router'
-
+import { api } from '@/services/api';
+import { GetServerSideProps } from 'next';
 //styles
 import styles from './styles.module.scss'
-
-//icons
-
-
-
 //components
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import TextShadow from '@/components/TextShadow';
 import Carousel from '@/components/Carousel';
 
-//fonts 
+interface TechnologiesProps{
+    name? : string
+}
+
+
+
+interface ProjectProps{
+    id : number
+    name : string
+    img? : string
+    description : string
+    link : string
+    technologies : TechnologiesProps[] 
+}
+
+
+
+interface SkillsProps{
+    projectsData : ProjectProps[]
+    technologiesData : TechnologiesProps[]
+}
 
 
 
 
-export default function Skills(){
+
+export default function Skills({projectsData, technologiesData} : SkillsProps){
     const routes = useRouter();
     const {id}   = routes.query as { id : string | number}
 
 
     return(
 
-        <LayoutPortfolio className={styles.layout}>
+<LayoutPortfolio>
+
+
 
              <div className={styles.content}>
 
@@ -34,20 +53,12 @@ export default function Skills(){
                 className={styles.h1}
                 title='Tecnologias' />
                 <ul>
-                    <li>html</li>
-                    <li>css</li>
-                    <li>sass</li>
-                    <li>styled - components</li>
-                    <li>javascript</li>
-                    <li>typescript</li>
-                    <li>nodejs</li>
-                    <li>nextjs</li>
-                    <li>reactjs</li>
-                    <li>sql</li>
-                    <li>postgresql</li>
-                    <li>mongo db </li>
-                    <li>knex </li>
-                    <li>prisma</li>
+                    {technologiesData && technologiesData.map((technologie, index) => (
+                        
+                        <li key={String(index)}>{technologie.name}</li>
+                        
+                    ))}
+                    
                 </ul>
             </div>
 
@@ -59,14 +70,47 @@ export default function Skills(){
                 
 
 
-            <Carousel />
+            <Carousel
+            data={projectsData}
+             />
 
             </div>
 
 
              </div>
 
-        </LayoutPortfolio>
+</LayoutPortfolio>    
        
     )
 }
+
+
+export const getServerSideProps: GetServerSideProps<SkillsProps> = async (ctx) =>{
+    try{
+        const {id} = ctx.query;
+        const projectResponse = await api.get(`/projects/${id}`)
+        const projectsData = projectResponse.data
+
+        const technologiesResponse = await api.get(`/technologies/${id}`)
+        const technologiesData = technologiesResponse.data
+
+
+        return{
+            props : {
+                technologiesData : technologiesData || [],
+                projectsData : projectsData || []
+            }
+        }
+
+    }catch(error){
+        console.log("error" + error)
+
+        return{
+            props : {
+                technologiesData : [],
+                projectsData : []
+            }
+        }
+    }
+}
+

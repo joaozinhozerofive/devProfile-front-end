@@ -1,26 +1,24 @@
 //utils
 import {HTMLAttributes} from 'react'
 import { register } from 'swiper/element/bundle'
+import { useRouter } from 'next/router';
+import { api } from '@/services/api';
 register();
-
 //styles
 import styles from './styles.module.scss'
-
 //components
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from 'next/image';
 import TextShadow from '../TextShadow';
-
+import Link from 'next/link';
 //icons 
 import { FiEdit } from 'react-icons/fi';
-
-
+//assets
 import avatarUrl from '../../../public/exampleimagem.avif'
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { api } from '@/services/api';
+
+
 
 //interfaces
 interface TechnologiesProps{
@@ -62,7 +60,9 @@ export default function ProjectCards({project, className, ...rest} : ProjectCard
     return(
 
         
-            <div key={project.id} className={styles.projectCards}>
+            <div 
+            key={project.id} 
+            className={styles.projectCards}>
             
                 <TextShadow 
                 className={styles.textShadow}
@@ -70,7 +70,7 @@ export default function ProjectCards({project, className, ...rest} : ProjectCard
                 />
                 <Link 
                     className = {` ${pathNameIncludes('edit/skills') ? styles.fiEdit : 'hidden'}`}
-                    href={`/portfolio/4/edit/editProjects/${project.id}`}>
+                    href={`/portfolio/${id}/edit/editProjects/${project.id}`}>
 
                         <FiEdit 
                         size = {20} />
@@ -78,18 +78,21 @@ export default function ProjectCards({project, className, ...rest} : ProjectCard
                  </Link>
 
 
-
+                <a 
+                target='_blank'
+                href={project.link}>
                  <img
                     className={styles.projectImg}
                     src = {`${api.defaults.baseURL}/files/${project.img}`}
                     alt = "Imagem do projeto" />
+                </a>
 
                     <p>Tecnologias usadas</p>
 
                 <div className={styles.technologies}>
                     
                     {project.technologies && project.technologies.map((technologie, index) => (
-                    <a key={String(index)}> {technologie.name}  </a>
+                    <p key={String(index)}> {technologie.name}  </p>
                     ))}
 
                 </div>

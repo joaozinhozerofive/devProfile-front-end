@@ -1,21 +1,16 @@
- //utils
+//utils
  import { useAuth } from '@/hook/AuthContext';
- 
- //estilização
+ //styles
  import styles from './styles.module.scss'
-
- //icons
+ //components
+  import Link from 'next/link';
+//icons
  import { FaGithub } from "react-icons/fa";
  import { CiLinkedin } from "react-icons/ci";
  import { FiEdit2 } from "react-icons/fi";
  import { FiPlus, FiLogOut } from 'react-icons/fi';
-
- //components
- import Link from 'next/link';
- import Button from '../Button';
- 
-
- //types
+ import { IoPersonOutline } from "react-icons/io5";
+//types
 import {HTMLAttributes} from 'react'
 import { useRouter } from 'next/router';
 
@@ -25,17 +20,31 @@ interface UserProps{
     link? : string
 }
 
+interface ContactsProps{
+    whatsapp : string
+    linkedin : string
+    github : string
+    email : string
+}
+
 
  interface MenuProps extends HTMLAttributes<HTMLDivElement>{
     className? : string, 
-    user? : string
+    contacts : ContactsProps
  }
  
  
- export default function Menu({className, user, ...rest} : MenuProps){
+ export default function Menu({className, contacts, ...rest} : MenuProps){
    const routes = useRouter()
    const {id}   = routes.query as { id : string | number}
-   const {signOut} = useAuth();
+   const {signOut, user_id} = useAuth();
+
+
+
+
+   const userIdMatched = user_id === Number(id)
+
+   console.log(userIdMatched)
 
 
      function pathNameIncludes(path : string ){
@@ -56,6 +65,15 @@ interface UserProps{
 
 
             <ul>
+               {userIdMatched ? (
+                <Link 
+                 className={pathNameIncludes('profile') ? styles.active : ""}
+                 href={`/portfolio/${id}/profile`}>
+                    <IoPersonOutline size = {20}/>
+                 </Link>
+
+               ) : ""}
+
                 <Link 
                  className={pathNameIncludes('about') ? styles.active : ""}
                  href={`/portfolio/${id}/about`}>
@@ -79,25 +97,35 @@ interface UserProps{
                     Blog
                  </Link>
 
+                {userIdMatched ? (
                 <Link
                  className={pathNameIncludes('edit') ? styles.active : ""}
                  href={`/portfolio/${id}/edit`}> Editar <FiEdit2/>
                 </Link> 
 
+                ) : ""}  
+
+               {userIdMatched? (
+                  <Link 
+                  className={pathNameIncludes('newProject') ? styles.active : ""}
+                  href={`/portfolio/${id}/newProject`}>
+   
+                     <p> <FiPlus/> Novo Projeto</p>
+                  </Link>
+               ) : ""} 
+
+               
+
+              {userIdMatched ? (
                <Link 
-               className={pathNameIncludes('newProject') ? styles.active : ""}
-               href={`/portfolio/${id}/newProject`}>
-
-                  <p> <FiPlus/> Novo Projeto</p>
-               </Link>
-
-
-              <Link 
                className={pathNameIncludes('newWork') ? styles.active : ""}
                href={`/portfolio/${id}/newWork`}>
 
                   <p> <FiPlus/> Nova experiência</p>
                </Link>
+              
+              ) : ""}    
+              
 
                <p onClick={() => signOut()}>
                   <FiLogOut size={25}/>
@@ -109,19 +137,26 @@ interface UserProps{
             
 
                 <div>
-                 <Link target = "_blank" href={'https://github.com/joaozinhozerofive'}>
+               {contacts?.github ? (
+                  <Link target = "_blank" href={contacts?.github}>
 
-                    <FaGithub 
-                    size = {20}/>
+                  <FaGithub 
+                  size = {20}/>
 
-                 </Link>
-                    
-                <Link target = "_blank" href = 'https://www.linkedin.com/in/jo%C3%A3o-machado-rorato-9674541a3/'>
+               </Link>
+               ) : ""}
+                 
+                {contacts?.linkedin ? (
+                  <Link target = "_blank" href = {contacts?.linkedin}>
 
-                <CiLinkedin 
-                size = {20}/>
+                  <CiLinkedin 
+                  size = {20}/>
+  
+                  </Link>
+  
 
-                </Link>
+                ):  ""}    
+                
                 </div>
 
 

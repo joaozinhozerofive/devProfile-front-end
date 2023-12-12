@@ -1,8 +1,9 @@
+//styles 
+import styles from './styles.module.scss'
 //utils
 import {ReactNode, FormHTMLAttributes} from 'react'
 
-//styles 
-import styles from './styles.module.scss'
+
 
 
  
@@ -14,7 +15,7 @@ interface FormProps extends FormHTMLAttributes<HTMLInputElement>{
 
 export default function Form({children, className} :  FormProps){
         return(
-            <form className={`${className} ${styles.form}`}>
+            <form className={`${className} ${styles.formContainer}`}>
 
                 {children}
 

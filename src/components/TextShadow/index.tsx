@@ -1,7 +1,5 @@
 //styles 
 import styles from './styles.module.scss'
-
-
 //types
 import {HTMLAttributes} from 'react'
 

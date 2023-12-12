@@ -1,13 +1,11 @@
 .layout{
 
-    
-    main{
-
-            
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin: 15% 1rem;
+    padding-left: 1rem;
 
 
         button{
@@ -15,16 +13,6 @@
         }
 
 
-        padding: 3rem 1rem 5rem 3rem ;
-
-        grid-area: main;
-
-        background-image:  url("../../../public/../../public//backgroundMainPortfolio.jpg");
-        background-size: cover;
-        background-position: center;
-        font-size: 2rem;
-
-        position: relative;
 
 
         h1{
@@ -34,28 +22,36 @@
             word-wrap: break-word;
 
 
-            font-size: 3rem;
+            font-size: 4rem;
 
         }
 
         p{
              color: var(--GRAY-100);
+             font-size: 2rem;
         }
      
 
         .button{
-            display: block;
+            text-align: center;
+            width: 35rem;
+            max-width: 100%;
             
             margin: 0;
 
             background: none;
 
             border: 1px solid var(--GREEN-500);
-            border-radius: 0.3  QW2455rem;
+            border-radius: 1rem;
 
             color: var(--GREEN-500);
 
             letter-spacing: 0.3rem;
+            font-size: 1.5rem;
+
+            padding: 0.8rem;
+
+
 
 
             &:hover{
@@ -64,7 +60,7 @@
         }
     }
     
-}
+    
 
 
 @media(min-width : 768px){

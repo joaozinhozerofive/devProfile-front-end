@@ -2,16 +2,12 @@
 import { useRouter } from 'next/router'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head';
-
+import { api } from '@/services/api';
+import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
 //styles 
 import styles from './styles.module.scss'
-
-
 //components
-import Button from '@/components/Button'
-import Footer from '@/components/Footer'
-import Brand from '@/components/Brand'
-import Menu from '@/components/Menu'
 import LayoutPortfolio from '@/components/Layout Portfolio';
 
 const roboto = Roboto({
@@ -20,37 +16,139 @@ const roboto = Roboto({
     subsets : ['latin'] // obrigatório
    })
 
-export default function Portfolio(){
+
+interface ContactsProps{
+    id : number
+    user_id: string
+    whatsapp : string
+    linkedin : string 
+    githubD : string 
+    email : string
+}
+
+interface UserProps{
+    id:  number
+    name : string
+    email : string
+    ocupation : string
+}
+
+
+interface PorfolioProps{
+    id : string | string[]
+}
+
+export default function Portfolio({id} :  PorfolioProps ){
     const routes = useRouter();
+    const [user, setUser] =  useState<UserProps>()
+    const [contacts, setContacts] = useState<ContactsProps>()
+
+
+    useEffect(() => {
+        async function  fetchContacts(){
+
+            try{
+                const contactsResponse = await api.get(`/contacts/${id}`)
+                const contactsData = contactsResponse.data
+        
+                
+                setContacts(contactsData)
+
+            }catch(error){
+                    console.log(error)
+                
+            }
+   
+           
+        }
+
+        if(id){
+            fetchContacts()
+
+        }   
+   
+       }, [id])
+       
+   
+       useEffect(() => {
+   
+           async function fetchUser() {
+   
+           const userResponse = await api.get(`/users/${id}`)
+           const userData = userResponse.data
+   
+           setUser(userData)
+   
+           }
+
+           if(id){
+
+           fetchUser()
+
+           }
+
+   
+       }, [id])
+
+
     return (
 
         <>
 
-
         <Head>
             <title>Dev Profile - joaozerofive</title>
         </Head>
-        
 
-<LayoutPortfolio className={styles.layout}>
+<LayoutPortfolio>
 
-            <h1>Olá, <br /> meu nome é João, <br /> Desenvolvedor Web Full Stack</h1>
-
-            <p>Web Developer Full Stack</p>
-
-            <Button
-            className={styles.button}
-            isLoading = {false}
-            title='Fale comigo!'
-            />
+        <div className={styles.layout}>
 
 
+                    <h1>Olá, <br /> meu nome é {user?.name}, <br /> {user?.ocupation}</h1>
 
+                    <p>{user?.ocupation}</p>
 
-</LayoutPortfolio>
+                    <a
 
-      
+                    target='_blank'
+                    href={contacts?.whatsapp}
+                    className={styles.button}
+                    >
+                        Fale comigo!
+
+                    </a>
+        </div>
+         
+</LayoutPortfolio>        
+
 
         </>
     )
 }
+
+
+export const getServerSideProps: GetServerSideProps<PorfolioProps> = async (ctx) => {
+    try{
+        const {id} = ctx.query;
+
+        return{
+            props : {
+                
+                id :  id || ''
+
+            }
+        };
+    }catch(error){
+        console.log(error)
+        
+
+        return { 
+            props : {
+                id : ''
+
+            }
+        }
+    }
+};
+
+

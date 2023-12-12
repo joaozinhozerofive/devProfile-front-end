@@ -1,4 +1,3 @@
-.layout{
 
     
     .content{
@@ -21,6 +20,11 @@
             flex-direction: column;
 
 
+            
+            width: 70rem;
+            max-width: 100%;
+
+
             gap: 1rem;
 
             background: var(--BACKGROUND-800);
@@ -32,8 +36,15 @@
 
             position: relative;
 
-            margin: 2rem auto;
 
+            margin : 2rem auto;
+
+            .fiEdit{
+                position: absolute;
+
+                right: 1rem;
+                top: 1rem;
+            }
 
             p{
                 font-size: 1.2rem;
@@ -55,4 +66,3 @@
 
         }
     }
-}

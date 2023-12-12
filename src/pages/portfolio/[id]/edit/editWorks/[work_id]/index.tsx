@@ -3,19 +3,15 @@ import {useState, ChangeEvent, useEffect} from 'react'
 import { useRouter } from 'next/router'
 import { api } from '@/services/api'
 import { GetServerSideProps } from 'next'
-
+import { toast } from 'react-toastify'
 //styles 
 import styles from './styles.module.scss'
-
-
-
 //components
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import Form from '@/components/Form'
 import TextShadow from '@/components/TextShadow'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
-import { toast } from 'react-toastify'
 
 
 interface WorkProps{
@@ -27,7 +23,9 @@ interface WorkProps{
     description : string
 }
 
-
+interface Props{
+    work_id : string | string []
+}
 
 
 export default function EditWork({work_id}){
@@ -39,10 +37,11 @@ export default function EditWork({work_id}){
     const [description, setDescription] = useState<string>('')
 
     const [isCurrent, setIsCurrent] = useState<boolean>(false)
+    const[readOnly, setReadOnly] = useState<boolean>(false)
+    const [buttonLoading, setButtonLoading] = useState<boolean>(false)
 
     const routes = useRouter()
 
-    console.log(work_id)
 
     useEffect(() =>{
         async function loadJquery(){
@@ -70,43 +69,140 @@ export default function EditWork({work_id}){
     useEffect(()=>{
 
         async function fetchWorks(){
-            try{
-                const response = await api.get(`/experience/${work_id}/detail`)
-                const data = response.data
 
-                setCompanyName(data.companyName)
-                setCity(data.city)
-                setFU(data.FU)
-                setStartDate(data.startDate)
-                setEndDate(data.endDate)
-                setDescription(data.description)
 
-                
-            }catch(error){
-                if(error.response?.data?.message){
-                    toast.error(error.response.data.message)
+                try{
+                    const response = await api.get(`/experience/${work_id}/detail`)
+                    const data = response.data
+    
+                    
+    
+                   
+                   
+    
+                    setCompanyName(data.companyName)
+                    setCity(data.city)
+                    setFU(data.FU)
+                    setStartDate(data.startDate)
+                    setEndDate(data.endDate)
+                    setDescription(data.description)
+
+                    if(data.endDate === 'Emprego atual'){
+                        setIsCurrent(true)
+                    }
+    
+    
+    
+                    
+                }catch(error){
+                    if(error.response?.data?.message){
+                        toast.error(error.response.data.message)
+                    }
                 }
+    
+    
             }
 
-
-        }
+           
 
         fetchWorks()
 
 
-    }, [work_id])
+    },[])
 
+
+    function handleChecked(){
+
+
+
+
+        if(endDate === 'Emprego atual'){
+            setIsCurrent(false)
+            setReadOnly(false)
+            setEndDate("")
+        }
+
+        if(isCurrent === false){
+            setIsCurrent(true)
+            setReadOnly(true)
+            setEndDate('Emprego atual')
+        }
+        
+
+        
+        
+    }
+
+
+    async function HandlwUpdateWork(){
+        setButtonLoading(true)
+
+        try{
+
+            await api.put(`/experience/${work_id}`, {companyName, city, FU, startDate, endDate, description })
+
+            toast.success("Experiência autalizada com sucesso!")
+
+            routes.back()
+
+
+        }catch(error){
+            if(error.response.data.message){
+                toast.error(error.response.data)
+            }else{
+                toast.error("Não foi possível atualizar esta experiência")
+            }
+        }finally{
+            setTimeout(() => {
+
+            setButtonLoading(false)
+                
+            }, 500)
+        }
+    }
+
+
+     async function handleRemoveWork(){
+        setButtonLoading(true)
+
+
+
+        try{
+             await api.delete(`/experience/${work_id}`)
+
+            toast.success('Experiência excluída com sucesso!')
+
+            routes.back()
+
+        }catch(error){
+            if(error.response.data.message){
+                toast.error(error.response.data)
+            }else{
+                toast.error("Não foi possível excluir esta experiência")
+            }
+
+        }finally{
+            setTimeout(() => {
+
+            setButtonLoading(false)
+                
+            }, 500)
+        }
     
-
+    }
 
 
     return (
-        <LayoutPortfolio>
+
+<LayoutPortfolio>
+
+        
 
         <div className={styles.content}>
-            <TextShadow 
-            className={styles.textshadow}
-            title='Nova Experiência'/>
+
+        <TextShadow 
+        className={styles.textshadow}
+        title='Editar Experiência'/>
             
 
             <Form>
@@ -169,7 +265,7 @@ export default function EditWork({work_id}){
                         onChange={(e) => setStartDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
-                        type='string'
+                        type='text'
                         />
 
                     </label>
@@ -181,10 +277,11 @@ export default function EditWork({work_id}){
                         <Input
                         id='endDate'
                         value={endDate}
+                        readOnly = {readOnly}
                         onChange={(e) => setEndDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
-                        type='string'
+                        type='text'
                         />
 
                     </label>
@@ -196,7 +293,7 @@ export default function EditWork({work_id}){
                     <label className={styles.checkbox} htmlFor="checkbox ">
                         Emprego atual
                         <input 
-                        onChange={e => setIsCurrent(e.target.checked)}
+                        onChange={() => handleChecked()}
                         checked = {isCurrent}
                         id='checkbox'
                         type="checkbox" />
@@ -217,12 +314,14 @@ export default function EditWork({work_id}){
 
 
                     <Button
-                    onClick={ () => routes.back()}
+                    isLoading={buttonLoading}
+                    onClick={ () => HandlwUpdateWork()}
                     title='Salvar' />
 
                     <Button 
+                    isLoading={buttonLoading}
                     className={styles.delete}
-                    onClick={ () => routes.back()}
+                    onClick={ () => handleRemoveWork()}
                     title='Excluir' />
 
 
@@ -231,13 +330,13 @@ export default function EditWork({work_id}){
 
         </div>
 
-        </LayoutPortfolio>
+</LayoutPortfolio>
+
+
     )
 }
 
-interface Props{
-    work_id : string | string []
-}
+
 
 
 export const getServerSideProps : GetServerSideProps<Props> = async (ctx) =>{

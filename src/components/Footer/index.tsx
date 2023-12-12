@@ -1,14 +1,12 @@
 //styles
 import styles from './styles.module.scss'
-
 //components
 import Image from "next/image"
 import TextShadow from '../TextShadow'
-
+//fonts
+import { Poppins } from "next/font/google"
 //assets
 import devIcon from '../../../public/devIcon.png'
-
-import { Poppins } from "next/font/google"
 
 const poppins = Poppins({
     weight: ['400'], 
@@ -26,7 +24,11 @@ export default function Footer({className} : FooterProps){
         <div className={`${styles.footerContainer} ${poppins.className} ${className} `}>
        
         <div className={`${styles.footer} `}>
-            <Image className={styles.imgFooter} src={devIcon} alt="Logo dev Profile" />
+            <Image 
+            width={0}
+            height={0}
+            className={styles.imgFooter} 
+            src={devIcon} alt="Logo dev Profile" />
             <TextShadow 
             className={styles.h1}
             title='Dev Profile'

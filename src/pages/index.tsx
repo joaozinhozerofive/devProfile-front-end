@@ -5,21 +5,20 @@ import { useAuth } from '../hook/AuthContext';
 import {useEffect, useState} from 'react'
 import { api } from '@/services/api';
 import Router from 'next/router';
-
-//icons
-import {FiSearch} from 'react-icons/fi'
-import { AiOutlineMail } from "react-icons/ai";
-import { RiLockPasswordLine } from "react-icons/ri";
-
+//styles
 import styles from '../styles/Home.module.scss'
-import backgroundIMg  from '../../public/backgroundImgHome.jpg'
-
 //componentes
 import Input from '@/components/Input'
 import Footer from '@/components/Footer'
 import Button from '@/components/Button'
 import UsersList from '@/components/UsersList';
 import Link from 'next/link';
+//icons
+import {FiSearch} from 'react-icons/fi'
+import { AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
+
+
 
 
 
@@ -158,7 +157,9 @@ const poppins = Poppins({
       </main>
 
 
-      <Footer className={styles.footerHome}  />
+      <Footer />
+
+
     </div>
     </>
   )

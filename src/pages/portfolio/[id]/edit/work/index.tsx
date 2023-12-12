@@ -1,24 +1,21 @@
 //utils 
 import {useState} from 'react';
-
-
-
-//icons
-import {  FiEdit } from 'react-icons/fi'
-
-
+import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next';
+import { api } from '@/services/api';
+//styles
+import styles from './styles.module.scss'
 //components
 import TextShadow from '@/components/TextShadow'
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import Link from 'next/link'
 import Button from '@/components/Button'
+//icons
+import {  FiEdit } from 'react-icons/fi'
 
 
-//styles
-import styles from './styles.module.scss'
-import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next';
-import { api } from '@/services/api';
+
+
 
 interface WorkProps{
     id : number
@@ -43,12 +40,11 @@ export default function EditWork({data} : EditWorksProps ){
     
 
     return(
-        <LayoutPortfolio className={styles.layout}>
 
-            {data && data.map(work => (
+<LayoutPortfolio>
 
             
-            <div key={String(work.id)} className={styles.content}>
+            <div  className={styles.content}>
 
                     <TextShadow
                     className={styles.textShadow}
@@ -56,7 +52,9 @@ export default function EditWork({data} : EditWorksProps ){
                      />
 
 
-                     <div className={styles.experience}>
+            {data && data.map(work => (
+
+                     <div key={String(work.id)} className={styles.experience}>
 
                         <Link href = {`/portfolio/${id}/edit/editWorks/${work.id}`}className = {styles.fiEdit}>
 
@@ -70,6 +68,7 @@ export default function EditWork({data} : EditWorksProps ){
 
 
                      </div>
+                     ))}
 
                      <Button 
 
@@ -77,9 +76,9 @@ export default function EditWork({data} : EditWorksProps ){
                         title='Finalizar' />
 
                 </div>
-                ))}
                 
-        </LayoutPortfolio>
+</LayoutPortfolio>     
+                
     )
 }
 

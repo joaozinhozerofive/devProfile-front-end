@@ -1,22 +1,28 @@
 //utils 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
+import { api } from '@/services/api';
+//styles 
+import styles from './styles.module.scss'
+//components
+import LayoutPortfolio from '@/components/Layout Portfolio';
+import TextShadow from '@/components/TextShadow';
+//icons 
+import { IoArrowBackSharp } from "react-icons/io5";
+import { GetServerSideProps } from 'next';
 //fonts 
 import {Mulish} from 'next/font/google'
 
-//styles 
-import styles from './styles.module.scss'
+
+interface UserProps{
+    name : string
+    about : string
+}
 
 
-//components
-import LayoutPortfolio from '@/components/Layout Portfolio';
-import ButtonText from '@/components/ButtonText';
-import TextShadow from '@/components/TextShadow';
-
-
-//icons 
-import { IoArrowBackSharp } from "react-icons/io5";
+interface AboutProps{
+    userData : UserProps
+}
 
 
 
@@ -27,7 +33,7 @@ const mulish = Mulish({
 })
 
 
-export default function About(){
+export default function About({userData} : AboutProps){
     const routes = useRouter();
 
 
@@ -37,33 +43,61 @@ export default function About(){
 
     return (
 
-<LayoutPortfolio className={styles.layout}>
-
-            
+<LayoutPortfolio>
 
             <div className={styles.content}>
 
             <TextShadow 
             className={styles.h1}
-            title='Conheça um pouco sobre João Vitor Machado '/>
+            title= {`Conheça um pouco sobre ${userData.name}`} />
 
 
             <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-            It has survived not only five centuries, but also the leap into electronic typesetting, 
-            remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            {userData.about}
             </p>
 
-            </div>    
+            </div>   
 
-
- </LayoutPortfolio>
+</LayoutPortfolio>
         
     )
 }
+
+
+
+
+
+export const getServerSideProps : GetServerSideProps<AboutProps> = async (ctx) => {
+
+    try{
+        const {id} = ctx.query
+        const response = await api.get(`/users/${id}`)
+        const data = response.data
+
+
+
+        return {
+
+            props : {
+                userData : data || ''
+            }
+
+        }
+
+    }catch(error){
+
+        console.log("error:" + error)
+
+        return {
+            props : {
+                userData : ''
+            }
+        }
+    }
+
+}
+
+
+
 
 

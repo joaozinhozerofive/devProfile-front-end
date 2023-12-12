@@ -1,11 +1,15 @@
-import './style.module.scss'
-import React, { ChangeEventHandler, InputHTMLAttributes } from 'react';
-import { IconType } from 'react-icons';
+//utils
+import React, {InputHTMLAttributes } from 'react';
+//styles
 import styles from './style.module.scss'
+//components
+import Loading  from '../Loading';
+//types
+import { IconType } from 'react-icons';
+//fonts
 import { Poppins } from 'next/font/google';
 
 
-import Loading  from '../Loading';
 
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{ 

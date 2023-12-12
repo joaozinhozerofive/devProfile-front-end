@@ -2,17 +2,8 @@
 import { Router, useRouter } from 'next/router';
 import {useState} from 'react'
 import { useEffect } from 'react';
-
 //styles
 import styles from './styles.module.scss'
-
-//assets 
-import exampleImage  from '../../../../../../../public/exampleimagem.avif'
-
-//icons 
-import { MdAddAPhoto } from "react-icons/md";
-
-
 //components
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import TextShadow from '@/components/TextShadow'
@@ -24,6 +15,12 @@ import Button from '@/components/Button'
 import { GetServerSideProps } from 'next';
 import { api } from '@/services/api';
 import { toast } from 'react-toastify';
+//icons 
+import { MdAddAPhoto } from "react-icons/md";
+
+
+
+
 
 interface TechnologiesProps{
     name : string
@@ -37,6 +34,9 @@ interface ProjectsProps {
     description? : string
     link?: string
     technologies?: TechnologiesProps[]
+}
+interface Props{
+    project_id : string | string []
 }
 
 export default function EditProjects({project_id}){
@@ -54,9 +54,10 @@ export default function EditProjects({project_id}){
     
     const routes = useRouter()
 
-    console.log(data)
+
+    
    
-    useEffect(() =>{
+    useEffect(() => {
         async function fetchProject(){
             try{
 
@@ -82,13 +83,24 @@ export default function EditProjects({project_id}){
         fetchProject()
 
     }, [project_id])
+    
 
 
 
+    function handleKeyDown(event) {
+        if(event.key === 'Enter'){
+            HandleNewTechnologie()
+        }
+    }
 
+    
 
-    function NewTechnologie(){
-        setTechnologies(technologies => [...technologies,  {name : newTechnologie} ])
+    function HandleNewTechnologie(){
+        if(!newTechnologie){
+            toast.warn("Você não tem nenhuma tecnologia para adicionar")
+        }
+        
+        setTechnologies(prevState => [...prevState,  {name : newTechnologie} ])
         setNewTechnologie('')
     }
 
@@ -100,6 +112,8 @@ export default function EditProjects({project_id}){
 
         setTechnologies(technologiesFiltered)
     }
+
+
 
 
     async function HandleChangeImgProject(e){
@@ -115,7 +129,10 @@ export default function EditProjects({project_id}){
     }
 
 
-    async function HandleNewProject(){
+   
+
+
+    async function HandleUpdateProject(){
         setButtonLoading(true)
         try{
 
@@ -129,7 +146,6 @@ export default function EditProjects({project_id}){
                 formData.append("technologies", technologie.name)
             })
 
-            console.log(newTechs)
 
             await api.put(`/projects/${project_id}`, formData)
 
@@ -182,130 +198,132 @@ export default function EditProjects({project_id}){
 
 
     return (
-        <LayoutPortfolio className={styles.layout}>
 
-    <div className={styles.content}>
- 
-        <TextShadow
-        className={styles.textshadow}
-        title='Editar - Projetos' 
-        />
+<LayoutPortfolio>
 
-
-
-    <Form className={styles.editProjects}>
-
-
-            <label>
-                Nome do projeto
-                <Input 
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder='Ex.: Loja de roupas'
-                className={styles.input}
-                type='text' />
-
-            </label>
-
-
-            <div className={styles.projectImg}>
-                    <Image
-                            className={styles.imagePreview}
-                            src={imagePreview}
-                            alt='Imagem do projeto'
-                            layout='responsive'
-                             height={0} 
-                             width={0} 
-                             />              
-                    
-                <div className={styles.newImage}>
-                    
-                    
-                        <Input
-                        name='img'
-                        onChange={e => HandleChangeImgProject(e)}
-                        className={styles.input} 
-                        type='file'/>
+        <div className={styles.content}>
+    
+            <TextShadow
+            className={styles.textshadow}
+            title='Editar - Projetos' 
+            />
 
 
 
-                        <MdAddAPhoto size = {20} className = {styles.iconImage}/>
+        <Form className={styles.editProjects}>
+
+
+                <label>
+                    Nome do projeto
+                    <Input 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder='Ex.: Loja de roupas'
+                    className={styles.input}
+                    type='text' />
+
+                </label>
+
+
+                <div className={styles.projectImg}>
+                        <Image
+                                className={styles.imagePreview}
+                                src={imagePreview}
+                                alt='Imagem do projeto'
+                                layout='responsive'
+                                height={0} 
+                                width={0} 
+                                />              
+                        
+                    <div className={styles.newImage}>
+                        
+                        
+                            <Input
+                            name='img'
+                            onChange={e => HandleChangeImgProject(e)}
+                            className={styles.input} 
+                            type='file'/>
+
+
+
+                            <MdAddAPhoto size = {20} className = {styles.iconImage}/>
+
+                    </div>
+
 
                 </div>
 
 
-            </div>
+                <label>
+                    Descrição do projeto
+                    
+                    <textarea 
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                    placeholder='Seja breve, escreva as funcionalidades e como funciona o projeto'>
+                    </textarea>
 
-
-            <label>
-                Descrição do projeto
+                </label>
                 
-                <textarea 
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                placeholder='Seja breve, escreva as funcionalidades e como funciona o projeto'>
-                </textarea>
+                <label >
+                    Tecnologias usadas
 
-            </label>
-            
-            <label >
-                Tecnologias usadas
-
-                <div className={styles.technologies}>
+                    <div className={styles.technologies}>
 
 
-                    {technologies && technologies.map((technologie, index) => (
-                     <TagItem
-                    onClick={() => RemoveTechnologie(technologie.name)}
-                    key={String(index)}
-                    value={technologie.name}              
-                    />
+                        {technologies && technologies.map((technologie, index) => (
+                        <TagItem
+                        onClick={() => RemoveTechnologie(technologie.name)}
+                        key={String(index)}
+                        value={technologie.name}              
+                        />
 
-                               ))} 
-                    <TagItem
-                    onClick={() => NewTechnologie()}
-                    onChange={(e) => setNewTechnologie(e.target.value)}
-                    value={newTechnologie}
-                    isNew 
-                    placeholder='Adicionar'
-                    /> 
+                                ))} 
+                        <TagItem
+                        onKeyDown={(e) => handleKeyDown(e)}
+                        onClick={() => HandleNewTechnologie()}
+                        onChange={(e) => setNewTechnologie(e.target.value)}
+                        value={newTechnologie}
+                        isNew 
+                        placeholder='Adicionar'
+                        /> 
 
-                </div>               
+                    </div>               
 
-            </label>
-
-
-            <label>
-                Link do projeto
-                <Input
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
-                placeholder='Cole o link do seu projeto'
-                className={styles.input}
-                type='text'/>
-            </label>
+                </label>
 
 
-                <Button
-                isLoading = {buttonLoading}
-                onClick={ () => HandleNewProject()}
-                title='Salvar' />
+                <label>
+                    Link do projeto
+                    <Input
+                    value={link}
+                    onChange={(e) => setLink(e.target.value)}
+                    placeholder='Cole o link do seu projeto'
+                    className={styles.input}
+                    type='text'/>
+                </label>
 
-                <Button 
-                className={styles.delete}
-                onClick={ () => handleDeleteProject()}
-                title='Excluir' />
+
+                    <Button
+                    isLoading = {buttonLoading}
+                    onClick={ () => HandleUpdateProject()}
+                    title='Salvar' />
+
+                    <Button 
+                    className={styles.delete}
+                    onClick={ () => handleDeleteProject()}
+                    title='Excluir' />
 
 
-    </Form>
+        </Form>
 </div>
-
 </LayoutPortfolio>
     )
 }
-interface Props{
-    project_id : string | string []
-}
+
+
+
+
 
 export const getServerSideProps : GetServerSideProps<Props> = async (ctx) =>{
         try{

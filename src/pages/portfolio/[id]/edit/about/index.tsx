@@ -2,11 +2,8 @@
 import { GetServerSideProps } from 'next'
 import {useState} from 'react'
 import {toast} from 'react-toastify'
-
 //styles
 import styles from './styles.module.scss'
-
-
 //components
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import TextShadow from '@/components/TextShadow'
@@ -65,7 +62,10 @@ export default function EditAbout({aboutData}){
 
 
     return(
-        <LayoutPortfolio className={styles.layout}>
+
+
+<LayoutPortfolio>
+
 
             <div className={styles.content}>
 
@@ -92,8 +92,9 @@ export default function EditAbout({aboutData}){
 
             </div>
 
+</LayoutPortfolio>
 
-        </LayoutPortfolio>
+
     )
 }
 

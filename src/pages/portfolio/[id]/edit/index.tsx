@@ -3,20 +3,8 @@ import {useState} from 'react'
 import { GetServerSideProps } from 'next';
 import { api } from '@/services/api';
 import {toast} from 'react-toastify'
-
 //styles
 import styles from './styles.module.scss'
-
-
-//icons
-import { FaWhatsapp } from "react-icons/fa";
-import { CiLinkedin } from 'react-icons/ci';
-import { GrGithub } from 'react-icons/gr';
-import { AiOutlineMail } from "react-icons/ai";
-
-
-
-
 //components
 import Input from '@/components/Input'
 import LayoutPortfolio from '@/components/Layout Portfolio'
@@ -24,10 +12,16 @@ import ButtonText from '@/components/Button'
 import Button from '@/components/Button'
 import TextShadow from '@/components/TextShadow'
 import Form from '@/components/Form';
-
+//icons
+import { FaWhatsapp } from "react-icons/fa";
+import { CiLinkedin } from 'react-icons/ci';
+import { GrGithub } from 'react-icons/gr';
+import { AiOutlineMail } from "react-icons/ai";
 //fonts 
 import { Poppins } from 'next/font/google';
 import { useRouter } from 'next/router';
+
+
 
 
 interface ContactsProps{
@@ -83,9 +77,8 @@ export default function Edit({whatsappData, linkedinData, githubData, emailData 
 
     
     return(
-        <LayoutPortfolio className={styles.layout}>
 
-
+<LayoutPortfolio>
         <div className={styles.content}>
 
                 <TextShadow 
@@ -144,7 +137,7 @@ export default function Edit({whatsappData, linkedinData, githubData, emailData 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         icon={AiOutlineMail}
-                        placeholder='Escreva um email de uso'
+                        placeholder='Link e-mail de uso: '
                         className={styles.input}
                         type='text' />
                     </label>
@@ -157,9 +150,8 @@ export default function Edit({whatsappData, linkedinData, githubData, emailData 
                 title='Próximo' />
             </div>
 
-            
+</LayoutPortfolio>           
 
-        </LayoutPortfolio>
     )
 }
 

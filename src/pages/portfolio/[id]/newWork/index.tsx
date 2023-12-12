@@ -1,27 +1,31 @@
 //utils 
 import {useState, ChangeEvent, useEffect} from 'react'
 import { useRouter } from 'next/router'
-
-
 //styles 
 import styles from './styles.module.scss'
-
-
-
 //components
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import Form from '@/components/Form'
 import TextShadow from '@/components/TextShadow'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
-
+import { api } from '@/services/api'
+import { toast } from 'react-toastify'
 
 
 
 
 export default function EditWork(){
+    const [companyName, setCompanyName] = useState<string>('')
+    const [city, setCity] = useState<string>('')
+    const [FU, setFU] = useState<string>('')
     const [startDate, setStartDate] = useState<string>('')
     const [endDate, setEndDate] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+
+    const [isCurrent, setIsCurrent] = useState<boolean>(false)
+    const[readOnly, setReadOnly] = useState<boolean>(false)
+    const [buttonLoading, setButtonLoading] = useState<boolean>(false)
 
     useEffect(() =>{
         async function loadJquery(){
@@ -42,6 +46,56 @@ export default function EditWork(){
         loadJquery()
 
     }, [])
+
+
+    function handleChecked(){
+
+
+        if(endDate === 'Emprego atual'){
+            setIsCurrent(false)
+            setReadOnly(false)
+            setEndDate("")
+        }
+
+        if(isCurrent === false){
+            setIsCurrent(true)
+            setReadOnly(true)
+            setEndDate('Emprego atual')
+        }
+        
+
+        
+        
+    }
+
+
+
+    async function handleNewWork(){
+        setButtonLoading(true)
+        try{
+
+
+            await api.post('/experience', {companyName, city, FU, startDate, endDate, description})
+
+            toast.success("Experiência criada com sucesso!")
+
+            routes.back()
+
+        }catch(error){
+            if(error.response.data.message){
+                toast.error(error.response.data.message)
+            }else{
+                toast.error("Não foi possível criar esta experiência")
+            }
+        }finally{
+            
+            setTimeout(()=>{
+
+             setButtonLoading(false)
+
+            }, 500)
+        }
+    }
     
 
    
@@ -51,8 +105,8 @@ export default function EditWork(){
     const {id} = routes.query;
 
     return (
-        <LayoutPortfolio>
-
+<LayoutPortfolio>
+    
         <div className={styles.content}>
             <TextShadow 
             className={styles.textshadow}
@@ -63,6 +117,8 @@ export default function EditWork(){
                 <label>
                     Nome da empresa
                     <Input
+                    value={companyName}
+                    onChange={e => setCompanyName(e.target.value)}
                     className={styles.input}
                     placeholder='Ex.: Udemy Tecnologia'
                     type='text'
@@ -79,6 +135,8 @@ export default function EditWork(){
                         Cidade
 
                         <Input
+                        value={city}
+                        onChange={e => setCity(e.target.value)}
                         className={styles.input}
                         placeholder='Ex.: Rio do Sul'
                         type='string'
@@ -88,6 +146,8 @@ export default function EditWork(){
                     <label>
                         UF
                         <Input
+                        value={FU}
+                        onChange={e => setFU(e.target.value)}
                         className={styles.input}
                         maxLength={3}
                         placeholder='Ex.: SC'
@@ -110,7 +170,7 @@ export default function EditWork(){
                         <Input
                         id='startDate'
                         value={startDate}
-                        onChange={(e : ChangeEvent<HTMLInputElement>) => setStartDate(e.target.value)}
+                        onChange={(e) => setStartDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
                         type='string'
@@ -123,9 +183,10 @@ export default function EditWork(){
                         Término
 
                         <Input
+                        readOnly = {readOnly}
                         id='endDate'
                         value={endDate}
-                        onChange={(e : ChangeEvent<HTMLInputElement>) => setEndDate(e.target.value)}
+                        onChange={(e) => setEndDate(e.target.value)}
                         className={styles.input}
                         placeholder='20/12/2023'
                         type='string'
@@ -140,6 +201,7 @@ export default function EditWork(){
                     <label className={styles.checkbox} htmlFor="checkbox ">
                         Emprego atual
                         <input 
+                        onChange={(e) => handleChecked()}
                         id='checkbox'
                         type="checkbox" />
 
@@ -148,14 +210,17 @@ export default function EditWork(){
                 <label>
                         Descrição da atividade
 
-                        <textarea placeholder='Ex.: Assistente financeiro - conferência de balancetes, etc..'></textarea>
+                        <textarea 
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                        placeholder='Ex.: Assistente financeiro - conferência de balancetes, etc..'></textarea>
 
                     </label>
 
 
 
                     <Button
-                    onClick={ () => routes.back()}
+                    onClick={ () => handleNewWork()}
                     title='Salvar' />
 
                    
@@ -166,6 +231,8 @@ export default function EditWork(){
 
         </div>
 
-        </LayoutPortfolio>
+</LayoutPortfolio>
+
+
     )
 }

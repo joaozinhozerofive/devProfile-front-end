@@ -1,11 +1,14 @@
+//styles
+import styles from './styles.module.scss'
+//components
 import Loading  from '../Loading';
+//types
 import { ButtonHTMLAttributes } from 'react';
-
+import { IconType } from 'react-icons';
+//fonts
 import { Poppins } from 'next/font/google';
 
 
-import { IconType } from 'react-icons';
-import styles from './styles.module.scss'
 
 
 

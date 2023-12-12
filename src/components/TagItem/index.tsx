@@ -1,15 +1,9 @@
 //utils
 import {InputHTMLAttributes, ChangeEventHandler} from 'react'
-
 //styles
 import styles from './styles.module.scss'
-
-
 //icons
 import { FiPlus, FiX } from "react-icons/fi"
-
-
-
 //fonts 
 import { Poppins } from 'next/font/google'
 

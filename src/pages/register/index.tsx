@@ -6,8 +6,13 @@ import { api } from '@/services/api';
 import { useState } from 'react';
 import Router from 'next/router';
 import { toast } from 'react-toastify'
-
-
+//styles
+import styles from './styles.module.scss'
+//componentes
+import Input from '@/components/Input'
+import Footer from '@/components/Footer'
+import Button from '@/components/Button'
+import UsersList from '@/components/UsersList';
 //icons
 import {FiSearch} from 'react-icons/fi'
 import { AiOutlineMail } from "react-icons/ai";
@@ -17,13 +22,7 @@ import { MdComputer } from "react-icons/md";
 
 
 
-import styles from './styles.module.scss'
 
-//componentes
-import Input from '@/components/Input'
-import Footer from '@/components/Footer'
-import Button from '@/components/Button'
-import UsersList from '@/components/UsersList';
  
 
 const poppins = Poppins({
@@ -133,7 +132,7 @@ const poppins = Poppins({
         <h1>Crie seu portifólio</h1>
 
               <label htmlFor="username">
-                <p>Nome Completp</p> 
+                <p>Nome Completo</p> 
 
                   <Input
                   onChange={(e) => setName(e.target.value)}
@@ -186,7 +185,7 @@ const poppins = Poppins({
                 <Button
                 onClick={() => handleSignUp()}
                 isLoading = {buttonLoading}
-                title='Entrar' />
+                title='Criar' />
 
           <h1 onClick={() => Router.push("/")}>Já sou usuário</h1>
 
@@ -196,8 +195,7 @@ const poppins = Poppins({
 
 
       </main>
-      
-      <Footer className={styles.footerHome} />
+      <Footer />
     </div>
     </>
   )

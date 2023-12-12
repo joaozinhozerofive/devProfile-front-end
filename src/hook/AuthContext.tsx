@@ -11,20 +11,22 @@ interface SignInProps {
 
 
 interface UserProps{
-    id : string
+    id? : string
     name : string
     email :  string 
     ocupation : string 
-    password ? : string 
+    password? : string 
+    old_password ? : string
     about? : string
     token : string
-    
+    img : File | undefined
 }
 
 
 interface DataProps {
     user? : UserProps
     token? :  string
+    user_id? : number
 }
 
 
@@ -32,12 +34,15 @@ interface AuthContextProps {
     data : DataProps
     signIn : (credentials : SignInProps) => Promise<void>
     signOut : () => void
+    user_id : number
 }
 
 
 interface AuthProviderProps{
     children : ReactNode
 }
+
+
 
 
 export const AuthContext = createContext({} as AuthContextProps)
@@ -58,6 +63,7 @@ export function AuthProvider({children} : AuthProviderProps){
             const response =  await api.post("/sessions", {email, password})
 
             const {token, user} = response.data
+            const user_id = user.id
 
             if(user && token){
                 Router.push(`/portfolio/${user.id}`)
@@ -66,7 +72,12 @@ export function AuthProvider({children} : AuthProviderProps){
                 localStorage.setItem("@devProfile:token",(token))
             }
 
-            setData({token, user})
+            setData({
+                token, 
+                user, 
+                user_id
+
+            })
 
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
@@ -84,6 +95,9 @@ export function AuthProvider({children} : AuthProviderProps){
         }
 
     }
+
+
+    
 
 
     function signOut(){
@@ -106,18 +120,28 @@ export function AuthProvider({children} : AuthProviderProps){
 
 
     useEffect(() => {
-        const user = localStorage.getItem("@devProfile:user")
+        const userStorage = localStorage.getItem("@devProfile:user")
         const token = localStorage.getItem("@devProfile:token")
 
 
-        api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        const user = JSON.parse(userStorage)
+
+        const user_id= user?.id
+
+
+
+
+        if(user && token){
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 
         setData({
-            user : JSON.parse(user),
-            token : token
+            user,
+            token, 
+            user_id 
         })
 
+        }
 
     }, [])
     
@@ -127,7 +151,7 @@ export function AuthProvider({children} : AuthProviderProps){
 
     return(
 
-        <AuthContext.Provider value={{ data, signIn, signOut}}>
+        <AuthContext.Provider value={{ user_id : data.user_id, data,   signIn, signOut}}>
 
           {children}
 

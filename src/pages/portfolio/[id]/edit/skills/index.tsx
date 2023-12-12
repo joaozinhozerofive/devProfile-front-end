@@ -4,18 +4,8 @@ import type { GetServerSideProps } from 'next';
 import { SyntheticEvent, useState } from 'react'
 import { api } from '@/services/api'
 import { toast } from 'react-toastify'
-
 //styles 
 import styles from './styles.module.scss'
-
-//assets
-import exampleImage from "../../../../../../public/exampleimagem.avif"
-
-//icons
-
-
-
-
 //components
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import TextShadow from '@/components/TextShadow'
@@ -57,7 +47,6 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
     const {id}   = routes.query as { id : string | number}
 
 
-    console.log(id)
 
 
     const data = [
@@ -71,11 +60,11 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
 
     function handleKeyDown(event) {
         if(event.key === 'Enter'){
-            NewTechnologie()
+            HandleNewTechnologie()
         }
     }
 
-    function NewTechnologie(){
+    function HandleNewTechnologie(){
         if(!newTechnologie){
             toast.warn("Você não tem nenhuma tecnologia para adicionar")
         }
@@ -126,8 +115,10 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
 
    
     return(
-        <LayoutPortfolio className={styles.layout}>
 
+<LayoutPortfolio>
+
+       
             <div className={styles.content}>
 
                     <TextShadow
@@ -153,7 +144,7 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
                                ))} 
 
                                 <TagItem
-                                onClick={() => NewTechnologie()}
+                                onClick={() => HandleNewTechnologie()}
                                 onChange={(e) => setNewTechnologie(e.target.value)}
                                 onKeyDown={(e) => handleKeyDown(e)}
                                 value={newTechnologie}
@@ -185,10 +176,9 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
             onClick={ () => routes.push(`/portfolio/${id}/edit/work`)}
             title='Próximo' />     
              
+</LayoutPortfolio>
                     
-                
 
-        </LayoutPortfolio>
     )
 }
 
