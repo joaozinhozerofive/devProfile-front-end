@@ -261,6 +261,7 @@ export default function Profile({nameData, emailData, ocupationData, imgData}: U
 export const getServerSideProps : GetServerSideProps<UsersProps> = async (ctx) => {
     try{
         const {id} = ctx.query;
+
         const response = await api.get(`/users/${id}`)
         const data = response.data
 

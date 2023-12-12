@@ -41,7 +41,7 @@ interface Props{
     project_id : string | string []
 }
 
-export default function EditProjects({project_id}){
+export default function EditProjects(){
     const [ data, setData] = useState<ProjectsProps>({})
     const [name, setName] = useState<string>('')
     const [img, setImg] = useState<File | string>('')
@@ -56,6 +56,8 @@ export default function EditProjects({project_id}){
     
     const routes = useRouter();
     const{id} = routes.query;
+
+    const{project_id} = routes.query;
 
     const {user_id} = useAuth();
 
@@ -79,7 +81,6 @@ export default function EditProjects({project_id}){
                 setDescription(projectData.description)
                 setLink(projectData.link)
                 setTechnologies(projectData.technologies)
-                setImagePreview(`${api.defaults.baseURL}/files/${projectData.img}`)
 
             }catch(error){
                 if(error.response.data.message){
@@ -208,7 +209,7 @@ export default function EditProjects({project_id}){
     if(!userIdMatched){
         return (
             <PageError />
-            
+
         )
     }
 
@@ -244,7 +245,7 @@ export default function EditProjects({project_id}){
                 <div className={styles.projectImg}>
                         <Image
                                 className={styles.imagePreview}
-                                src={imagePreview}
+                                src={imagePreview ?? `${api.defaults.baseURL}/files/${img}`}
                                 alt='Imagem do projeto'
                                 layout='responsive'
                                 height={0} 
