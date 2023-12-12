@@ -81,6 +81,7 @@ export default function EditProjects(){
                 setDescription(projectData.description)
                 setLink(projectData.link)
                 setTechnologies(projectData.technologies)
+                setImagePreview(`${api.defaults.baseURL}/files/${projectData.img}`)
 
             }catch(error){
                 if(error.response.data.message){
@@ -245,7 +246,7 @@ export default function EditProjects(){
                 <div className={styles.projectImg}>
                         <Image
                                 className={styles.imagePreview}
-                                src={imagePreview ?? `${api.defaults.baseURL}/files/${img}`}
+                                src={imagePreview}
                                 alt='Imagem do projeto'
                                 layout='responsive'
                                 height={0} 
