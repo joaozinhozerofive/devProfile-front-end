@@ -120,7 +120,7 @@ export default function EditWork({work_id}){
         fetchWorks()
 
 
-    },[])
+    },[work_id])
 
 
     function handleChecked(){
