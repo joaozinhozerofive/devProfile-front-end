@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'localhost',
         port: '3030',
       },
+      {
+        protocol: 'https',
+        hostname: 'dev-profile-front-end.vercel.app',
+        port: '',
+      },
     ],
   }
 }
