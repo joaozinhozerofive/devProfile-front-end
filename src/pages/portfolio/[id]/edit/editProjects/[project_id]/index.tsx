@@ -1,7 +1,10 @@
 //utils
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import {useState} from 'react'
 import { useEffect } from 'react';
+import { GetServerSideProps } from 'next';
+import { api } from '@/services/api';
+import { toast } from 'react-toastify';
 //styles
 import styles from './styles.module.scss'
 //components
@@ -12,11 +15,10 @@ import Input from '@/components/Input'
 import Form from '@/components/Form'
 import TagItem from '@/components/TagItem'
 import Button from '@/components/Button'
-import { GetServerSideProps } from 'next';
-import { api } from '@/services/api';
-import { toast } from 'react-toastify';
+import PageError from '@/components/PageError';
 //icons 
 import { MdAddAPhoto } from "react-icons/md";
+import { useAuth } from '@/hook/AuthContext';
 
 
 
@@ -52,7 +54,13 @@ export default function EditProjects({project_id}){
     const [buttonLoading, setButtonLoading] = useState(false)
 
     
-    const routes = useRouter()
+    const routes = useRouter();
+    const{id} = routes.query;
+
+    const {user_id} = useAuth();
+
+    const userIdMatched = user_id === Number(id)
+
 
 
     
@@ -194,6 +202,14 @@ export default function EditProjects({project_id}){
                 
             }, 500)
         }
+    }
+
+
+    if(!userIdMatched){
+        return (
+            <PageError />
+            
+        )
     }
 
 

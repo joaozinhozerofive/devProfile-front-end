@@ -46,7 +46,7 @@ interface ProjectCardsProps extends  HTMLAttributes<HTMLDivElement>{
 
 export default function ProjectCards({project, className, ...rest} : ProjectCardsProps){
     const routes = useRouter()
-    const {id} = routes.query as {id : string | number}
+    const {id} = routes.query 
     
     function pathNameIncludes(path : string ){
 

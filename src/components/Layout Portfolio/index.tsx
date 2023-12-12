@@ -117,9 +117,7 @@ export default function LayoutPortfolio({children, className, ...rest} : LayoutP
     return (
         <>
 
-        <Head>
-            <title>Dev Profile - joaozerofive</title>
-        </Head>
+        
         
 <div className={`${styles.layoutContainer} ${roboto.className} ${className}`}>
 

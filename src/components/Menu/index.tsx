@@ -36,7 +36,7 @@ interface ContactsProps{
  
  export default function Menu({className, contacts, ...rest} : MenuProps){
    const routes = useRouter()
-   const {id}   = routes.query as { id : string | number}
+   const {id}   = routes.query 
    const {signOut, user_id} = useAuth();
 
 

@@ -12,6 +12,8 @@ import Form from '@/components/Form'
 import TextShadow from '@/components/TextShadow'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
+import { useAuth } from '@/hook/AuthContext'
+import PageError from '@/components/PageError'
 
 
 interface WorkProps{
@@ -41,6 +43,16 @@ export default function EditWork({work_id}){
     const [buttonLoading, setButtonLoading] = useState<boolean>(false)
 
     const routes = useRouter()
+    const {id} = routes.query;
+
+    const {user_id} = useAuth()
+
+    const userIdMatched = user_id === Number(id)
+
+
+
+
+
 
 
     useEffect(() =>{
@@ -189,6 +201,13 @@ export default function EditWork({work_id}){
             }, 500)
         }
     
+    }
+
+
+    if(!userIdMatched){
+        return(
+            <PageError />
+        )
     }
 
 

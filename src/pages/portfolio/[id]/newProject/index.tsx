@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { api } from '@/services/api';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import Head from 'next/head';
+import { useAuth } from '@/hook/AuthContext';
 //styles 
 import styles from './styles.module.scss'
 //components
@@ -13,6 +15,7 @@ import Form from '@/components/Form'
 import Image from 'next/image'
 import TagItem from '@/components/TagItem'
 import Button from '@/components/Button'
+import PageError from '@/components/PageError';
 //icons
 import { MdAddAPhoto } from "react-icons/md";
 //assets
@@ -40,6 +43,11 @@ export default function NewProject(){
 
     const projecImgUrl = imagePreview ? imagePreview : exampleImage
     const routes = useRouter()
+    const {id} = routes.query;
+
+    const {user_id} = useAuth()
+
+    const userIdMatched = user_id === Number(id)
 
 
 
@@ -128,11 +136,20 @@ export default function NewProject(){
         }
     }
 
-
+    if(!userIdMatched){
+        return (
+            <PageError />
+        )
+    }
 
 
     return(
+<>
 
+
+<Head>
+    <title>Dev Profile - Novo Projeto</title>
+</Head>
 <LayoutPortfolio>
         <div className={styles.content}>
         
@@ -239,6 +256,9 @@ export default function NewProject(){
 
         
 </LayoutPortfolio>
+
+</>
+
     )
 
 

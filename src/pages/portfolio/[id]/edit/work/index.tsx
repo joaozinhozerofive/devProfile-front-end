@@ -1,14 +1,16 @@
 //utils 
-import {useState} from 'react';
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next';
 import { api } from '@/services/api';
+import Head from 'next/head';
+import { useAuth } from '@/hook/AuthContext';
 //styles
 import styles from './styles.module.scss'
 //components
 import TextShadow from '@/components/TextShadow'
 import LayoutPortfolio from '@/components/Layout Portfolio'
 import Link from 'next/link'
+import PageError from '@/components/PageError';
 import Button from '@/components/Button'
 //icons
 import {  FiEdit } from 'react-icons/fi'
@@ -36,11 +38,25 @@ export default function EditWork({data} : EditWorksProps ){
     
 
     const routes = useRouter()
-    const {id} = routes.query
+    const {id} = routes.query 
+    const {user_id} =  useAuth()
+
+    const userIdMatched = user_id === Number(id)
+
+
+    if(!userIdMatched){
+        return (
+            <PageError />
+        )
+    }
     
 
     return(
+<>
 
+<Head>
+    <title>Dev Profile - Editar experiências</title>
+</Head>
 <LayoutPortfolio>
 
             
@@ -78,6 +94,7 @@ export default function EditWork({data} : EditWorksProps ){
                 </div>
                 
 </LayoutPortfolio>     
+</>
                 
     )
 }

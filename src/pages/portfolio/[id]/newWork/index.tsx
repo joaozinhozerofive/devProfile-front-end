@@ -1,6 +1,7 @@
 //utils 
-import {useState, ChangeEvent, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 //styles 
 import styles from './styles.module.scss'
 //components
@@ -11,6 +12,8 @@ import Input from '@/components/Input'
 import Button from '@/components/Button'
 import { api } from '@/services/api'
 import { toast } from 'react-toastify'
+import { useAuth } from '@/hook/AuthContext'
+import PageError from '@/components/PageError'
 
 
 
@@ -104,7 +107,22 @@ export default function EditWork(){
     const routes = useRouter()
     const {id} = routes.query;
 
+    const {user_id} =  useAuth();
+
+    const userIdMatched = user_id === Number(id)
+
+    if(!userIdMatched){
+        return (
+            <PageError />
+        )
+    }
+
     return (
+
+<>
+<Head>
+    <title>Dev Profile - Nova Experiência</title>
+</Head>
 <LayoutPortfolio>
     
         <div className={styles.content}>
@@ -232,6 +250,7 @@ export default function EditWork(){
         </div>
 
 </LayoutPortfolio>
+</>        
 
 
     )

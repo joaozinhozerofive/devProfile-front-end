@@ -2,6 +2,7 @@
 import { useRouter } from 'next/router'
 import { api } from '@/services/api';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 //styles
 import styles from './styles.module.scss'
 //components
@@ -37,10 +38,14 @@ interface SkillsProps{
 
 export default function Skills({projectsData, technologiesData} : SkillsProps){
     const routes = useRouter();
-    const {id}   = routes.query as { id : string | number}
+    const {id}   = routes.query 
 
 
     return(
+<>
+<Head>
+    <title>Dev Profile - Habilidades</title>
+</Head>
 
 <LayoutPortfolio>
 
@@ -80,7 +85,8 @@ export default function Skills({projectsData, technologiesData} : SkillsProps){
              </div>
 
 </LayoutPortfolio>    
-       
+</>
+      
     )
 }
 

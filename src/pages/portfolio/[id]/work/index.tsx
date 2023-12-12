@@ -2,6 +2,7 @@
 import { api } from '@/services/api'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 //styles
 import styles from './styles.module.scss'
 //components
@@ -31,7 +32,11 @@ export default function Work({data}){
 
 
     return(
+<>
 
+<Head>
+    <title>Dev Profile - Experiência</title>
+</Head>
 <LayoutPortfolio>
 
             <div className={styles.content}>
@@ -56,6 +61,7 @@ export default function Work({data}){
             </div>
 
 </LayoutPortfolio>
+</>
 
                 
     )

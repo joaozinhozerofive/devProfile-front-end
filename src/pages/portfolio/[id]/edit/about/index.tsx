@@ -2,6 +2,7 @@
 import { GetServerSideProps } from 'next'
 import {useState} from 'react'
 import {toast} from 'react-toastify'
+import Head from 'next/head'
 //styles
 import styles from './styles.module.scss'
 //components
@@ -12,6 +13,8 @@ import Form from '@/components/Form'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { api } from '@/services/api'
+import { useAuth } from '@/hook/AuthContext'
+import PageError from '@/components/PageError'
 
 
 
@@ -28,7 +31,11 @@ export default function EditAbout({aboutData}){
     const [buttonLoading, setButtonLoading] =  useState(false)
 
     const routes = useRouter()
-    const {id}   = routes.query as { id : string | number}
+    const {id}   = routes.query 
+
+    const {user_id} = useAuth();
+
+    const userIdMatched = user_id === Number(id)
 
 
     async function handleEditAbout(){
@@ -61,8 +68,21 @@ export default function EditAbout({aboutData}){
     }
 
 
+    if(!userIdMatched){
+        
+        return (
+            PageError
+        )
+    }
+
+
     return(
 
+<>
+
+<Head>
+    <title>Dev Profile - Editar sobre </title>
+</Head>
 
 <LayoutPortfolio>
 
@@ -94,6 +114,7 @@ export default function EditAbout({aboutData}){
 
 </LayoutPortfolio>
 
+</>
 
     )
 }

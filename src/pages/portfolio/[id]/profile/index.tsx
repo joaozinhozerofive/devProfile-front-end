@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { api } from '@/services/api';
 import Router from 'next/router';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 //styles 
 import styles from './styles.module.scss'
 //components
@@ -14,6 +15,7 @@ import Input from '@/components/Input'
 import Image from 'next/image'
 import TextShadow from '@/components/TextShadow';
 import Button from '@/components/Button';
+import PageError from '@/components/PageError';
 //icons
 import { MdAddAPhoto } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
@@ -29,6 +31,7 @@ import avatar from '../../../../../public/avatarUrl.png'
 
 
 interface UsersProps{
+    id : string | string[]
     nameData : string
     emailData : string
     ocupationData : string
@@ -40,7 +43,7 @@ interface UsersProps{
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Profile({nameData, emailData, ocupationData, imgData}: UsersProps){
+export default function Profile({nameData, emailData, ocupationData, imgData, id}: UsersProps){
 
 
     const [name, setName] =  useState<string>(nameData)
@@ -55,6 +58,9 @@ export default function Profile({nameData, emailData, ocupationData, imgData}: U
     const avatarUrl = img ? `${`${api.defaults.baseURL}/files/${img}`}` : avatar
 
     const [imagePreview, setImagePreview] = useState(avatarUrl)
+
+    const {user_id} = useAuth()
+    const userIdMatched = user_id === Number(id)
 
 
     async function HandleUpdateProfile(){
@@ -123,7 +129,20 @@ export default function Profile({nameData, emailData, ocupationData, imgData}: U
     }
 
 
+    if(!userIdMatched){
+        return(
+            <PageError/>
+        )
+    }
+
+
     return (
+
+<>
+
+<Head>
+    <title>Dev Profile - Perfil</title>
+</Head>
         <LayoutPortfolio>
         <div className={styles.content}>
 
@@ -229,6 +248,8 @@ export default function Profile({nameData, emailData, ocupationData, imgData}: U
               </Form>
         </div>
         </LayoutPortfolio>
+</>        
+
     )
 }
  
@@ -242,6 +263,7 @@ export const getServerSideProps : GetServerSideProps<UsersProps> = async (ctx) =
         return{
 
             props: {
+                id : id || null,
                 nameData : data.name || '', 
                 emailData : data.email || '', 
                 ocupationData : data.ocupation || '', 
@@ -253,6 +275,7 @@ export const getServerSideProps : GetServerSideProps<UsersProps> = async (ctx) =
     }catch{
         return{
             props : { 
+                id : '',
                 nameData : "", 
                 emailData : "", 
                 ocupationData : "",

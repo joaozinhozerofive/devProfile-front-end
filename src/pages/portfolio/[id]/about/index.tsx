@@ -42,6 +42,12 @@ export default function About({userData} : AboutProps){
 
 
     return (
+<>
+
+<Head>
+    <title>Dev Profile -  Sobre</title>
+</Head>
+
 
 <LayoutPortfolio>
 
@@ -59,6 +65,7 @@ export default function About({userData} : AboutProps){
             </div>   
 
 </LayoutPortfolio>
+</>
         
     )
 }

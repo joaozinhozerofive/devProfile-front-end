@@ -94,10 +94,10 @@ export default function Portfolio({id} :  PorfolioProps ){
     return (
 
         <>
-
         <Head>
-            <title>Dev Profile - joaozerofive</title>
+            <title>Dev Profile - {user?.name}</title>
         </Head>
+
 
 <LayoutPortfolio>
 

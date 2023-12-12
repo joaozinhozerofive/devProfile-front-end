@@ -1,9 +1,10 @@
 //utils
 import { useRouter } from 'next/router'
 import type { GetServerSideProps } from 'next';
-import { SyntheticEvent, useState } from 'react'
+import { useState } from 'react'
 import { api } from '@/services/api'
 import { toast } from 'react-toastify'
+import Head from 'next/head';
 //styles 
 import styles from './styles.module.scss'
 //components
@@ -14,6 +15,8 @@ import Input from '@/components/Input'
 import Form from '@/components/Form'
 import TagItem from '@/components/TagItem'
 import Carousel from '@/components/Carousel'
+import { useAuth } from '@/hook/AuthContext';
+import PageError from '@/components/PageError';
 
 
 interface TechnologiesProps{
@@ -44,7 +47,11 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
     const [newTechnologie, setNewTechnologie] = useState<string>('')
     const [buttonLoading, setButtonLoading] = useState(false)
     const routes = useRouter()
-    const {id}   = routes.query as { id : string | number}
+    const {id}   = routes.query 
+
+    const {user_id} = useAuth()
+
+    const userIdMatched = user_id === Number(id)
 
 
 
@@ -113,9 +120,21 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
     }
 
 
+    if(!userIdMatched){
+        return (
+            <PageError />
+        )
+    }
+
+
    
     return(
 
+<>
+
+<Head>
+    <title>Dev Profile -  Editar habilidades</title>
+</Head>
 <LayoutPortfolio>
 
        
@@ -178,6 +197,7 @@ export default function EditSkills({ technologiesData, projectsData } : EditSkil
              
 </LayoutPortfolio>
                     
+</>
 
     )
 }

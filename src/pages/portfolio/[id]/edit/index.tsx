@@ -3,6 +3,9 @@ import {useState} from 'react'
 import { GetServerSideProps } from 'next';
 import { api } from '@/services/api';
 import {toast} from 'react-toastify'
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/hook/AuthContext';
 //styles
 import styles from './styles.module.scss'
 //components
@@ -17,9 +20,9 @@ import { FaWhatsapp } from "react-icons/fa";
 import { CiLinkedin } from 'react-icons/ci';
 import { GrGithub } from 'react-icons/gr';
 import { AiOutlineMail } from "react-icons/ai";
-//fonts 
-import { Poppins } from 'next/font/google';
-import { useRouter } from 'next/router';
+import PageError from '@/components/PageError';
+
+
 
 
 
@@ -52,6 +55,10 @@ export default function Edit({whatsappData, linkedinData, githubData, emailData 
     const routes = useRouter()
     const {id} = routes.query as {id : string | number}
 
+    const {user_id} = useAuth()
+
+    const userIdMatched = user_id === Number(id)
+
 
 
     async function handleUpdateContacts(){
@@ -75,8 +82,20 @@ export default function Edit({whatsappData, linkedinData, githubData, emailData 
         }
     }
 
+    if(!userIdMatched){
+        return(
+            <PageError />
+        )
+    }
+
     
     return(
+
+        <>
+
+        <Head>
+            <title>Dev Profile - Editar contatos </title>
+        </Head>
 
 <LayoutPortfolio>
         <div className={styles.content}>
@@ -150,7 +169,9 @@ export default function Edit({whatsappData, linkedinData, githubData, emailData 
                 title='Próximo' />
             </div>
 
-</LayoutPortfolio>           
+</LayoutPortfolio>   
+</>
+
 
     )
 }
