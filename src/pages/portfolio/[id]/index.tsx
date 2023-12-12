@@ -58,6 +58,9 @@ export default function Portfolio({id} :  PorfolioProps ){
                     console.log(error)
                 
             }
+
+
+            console.log(id)
    
            
         }
