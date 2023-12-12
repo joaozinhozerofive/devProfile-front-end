@@ -41,7 +41,7 @@ interface Props{
     project_id : string | string []
 }
 
-export default function EditProjects(){
+export default function EditProjects({project_id}){
     const [ data, setData] = useState<ProjectsProps>({})
     const [name, setName] = useState<string>('')
     const [img, setImg] = useState<File | string>('')
@@ -56,8 +56,6 @@ export default function EditProjects(){
     
     const routes = useRouter();
     const{id} = routes.query;
-
-    const{project_id} = routes.query;
 
     const {user_id} = useAuth();
 
@@ -210,7 +208,6 @@ export default function EditProjects(){
     if(!userIdMatched){
         return (
             <PageError />
-
         )
     }
 
