@@ -3,6 +3,7 @@ import styles from './styles.module.scss'
 
 //components
 import TextShadow from '../TextShadow'
+import { FiMail } from 'react-icons/fi'
 
 
 //types
