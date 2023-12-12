@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '@/hook/AuthContext';
 import { toast } from 'react-toastify';
 import { api } from '@/services/api';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 //styles 
@@ -43,7 +43,7 @@ interface UsersProps{
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Profile({nameData, emailData, ocupationData, imgData, id}: UsersProps){
+export default function Profile({nameData, emailData, ocupationData, imgData}: UsersProps){
 
 
     const [name, setName] =  useState<string>(nameData)
@@ -60,6 +60,10 @@ export default function Profile({nameData, emailData, ocupationData, imgData, id
     const [imagePreview, setImagePreview] = useState(avatarUrl)
 
     const {user_id} = useAuth()
+
+    const {id} = useRouter().query;
+
+
     const userIdMatched = user_id === Number(id)
 
 
