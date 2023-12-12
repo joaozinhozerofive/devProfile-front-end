@@ -134,7 +134,7 @@ export const getServerSideProps: GetServerSideProps<PorfolioProps> = async (ctx)
         return{
             props : {
                 
-                id :  id || ''
+                id :  id.toString() || ''
 
             }
         };
