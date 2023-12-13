@@ -245,7 +245,7 @@ export default function EditProjects({project_id}){
                 <div className={styles.projectImg}>
                         <Image
                                 className={styles.imagePreview}
-                                src={`${api.defaults.baseURL}/files/${imagePreview}`}
+                                src={imagePreview}
                                 alt='Imagem do projeto'
                                 layout='responsive'
                                 height={0} 

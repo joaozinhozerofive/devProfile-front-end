@@ -43,7 +43,7 @@ interface UsersProps{
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Profile({nameData, emailData, ocupationData, imgData}: UsersProps){
+export default function Profile({nameData, emailData, ocupationData, imgData, id}: UsersProps){
 
 
     const [name, setName] =  useState<string>(nameData)
@@ -61,13 +61,13 @@ export default function Profile({nameData, emailData, ocupationData, imgData}: U
 
     const {user_id} = useAuth()
 
-    const {id} = useRouter().query;
+    //const {id} = useRouter().query;
 
 
     const userIdMatched = user_id === Number(id)
 
 
-
+    console.log(nameData, emailData, ocupationData, id  )
 
     async function HandleUpdateProfile(){
 
