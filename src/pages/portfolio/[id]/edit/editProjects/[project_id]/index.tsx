@@ -136,7 +136,6 @@ export default function EditProjects({project_id}){
         setImagePreview(imagePreview)
     }
 
-    console.log('project_id:' +  project_id)
     console.log('img:' + imagePreview)
 
 
