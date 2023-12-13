@@ -26,7 +26,7 @@ const poppins = Poppins({
     subsets : ['latin'] // obrigatório
    })
 
-   export default function ButtonText({icon : Icon, isLoading, placeholder, onClick, className,title, ...rest} : ButtonProps){
+   export default function ButtonText({icon : Icon, isLoading, onClick, className,title, ...rest} : ButtonProps){
     return(
         <button 
         onClick = {onClick}

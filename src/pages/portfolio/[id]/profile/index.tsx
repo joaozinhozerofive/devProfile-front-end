@@ -67,6 +67,9 @@ export default function Profile({nameData, emailData, ocupationData, imgData}: U
     const userIdMatched = user_id === Number(id)
 
 
+    console.log( "NAME:", nameData)
+
+
     async function HandleUpdateProfile(){
 
         setButtonLoading(true)
