@@ -31,7 +31,7 @@ import avatar from '../../../../../public/avatarUrl.png'
 
 
 interface UsersProps{
-    id : string | string[]
+    idData : string | string[]
     nameData : string
     emailData : string
     ocupationData : string
@@ -43,7 +43,7 @@ interface UsersProps{
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Profile({nameData, emailData, ocupationData, imgData, id}: UsersProps){
+export default function Profile({nameData, emailData, ocupationData, imgData, idData}: UsersProps){
 
 
     const [name, setName] =  useState<string>(nameData)
@@ -61,13 +61,13 @@ export default function Profile({nameData, emailData, ocupationData, imgData, id
 
     const {user_id} = useAuth()
 
-    //const {id} = useRouter().query;
+    const {id} = useRouter().query;
 
 
     const userIdMatched = user_id === Number(id)
 
 
-    console.log(nameData, emailData, ocupationData, id  )
+    console.log(nameData, emailData, ocupationData, idData  )
 
     async function HandleUpdateProfile(){
 
@@ -270,7 +270,7 @@ export const getServerSideProps : GetServerSideProps<UsersProps> = async (ctx) =
         return{
 
             props: {
-                id : id || null,
+                idData : id || null,
                 nameData : data.name || '', 
                 emailData : data.email || '', 
                 ocupationData : data.ocupation || '', 
@@ -282,7 +282,7 @@ export const getServerSideProps : GetServerSideProps<UsersProps> = async (ctx) =
     }catch{
         return{
             props : { 
-                id : '',
+                idData : '',
                 nameData : "", 
                 emailData : "", 
                 ocupationData : "",
