@@ -67,7 +67,7 @@ export default function Profile({nameData, emailData, ocupationData, imgData, id
     const userIdMatched = user_id === Number(id)
 
 
-    console.log(nameData, emailData, ocupationData, idData  )
+    console.log('nameData:' + nameData, emailData, ocupationData, 'id: ' + idData  )
 
     async function HandleUpdateProfile(){
 
