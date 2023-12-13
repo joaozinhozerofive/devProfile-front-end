@@ -136,7 +136,7 @@ export default function EditProjects({project_id}){
         setImagePreview(imagePreview)
     }
 
-    console.log('project_id:'+  project_id)
+    console.log('project_id:' +  project_id)
 
 
    
@@ -245,7 +245,7 @@ export default function EditProjects({project_id}){
                 <div className={styles.projectImg}>
                         <Image
                                 className={styles.imagePreview}
-                                src={imagePreview}
+                                src={`${api.defaults.baseURL}/files/${imagePreview}`}
                                 alt='Imagem do projeto'
                                 layout='responsive'
                                 height={0} 
