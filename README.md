@@ -4,7 +4,7 @@
 
 Este é o resultado de um projeto pessoal, o Dev Profile
 <br>
-Nele realizei a criação do FrontEnd e do BackEnd completo da aplicação. Porém por virtudes de operações, o deploy não foi completado
+Nele realizei a criação do FrontEnd e do BackEnd completo da aplicação.
 
 ___
 
@@ -49,7 +49,7 @@ ___
 Clone o projeto para o local desejado em seu computador.
 
 ```bash
-$ git clone git@github.com:joaozinhozerofive/FoodExplorer-api.git
+$ https://github.com/joaozinhozerofive/devProfile-api.git
 ```
 ___
 
@@ -58,8 +58,15 @@ ___
 # Instale as dependências necessárias
 $ npm install
 
+# Instale o PostgreSQL na sua máquina 
+(https://www.postgresql.org/)
+Crie um banco de dados no postgreSQL e conecte através da variável de ambiente DATABASE_URL=
+
 # Agora inicie o servidor do BackEnd
 $ npm run dev
+
+# Agora crie as tabelas no banco de dados
+$ npx prisma migrate
 ```
 ___
 
@@ -72,26 +79,10 @@ $ npm install
 $ npm run dev
 
 # O terminal irá exibir o endereço local onde a aplicação está sendo executada. Basta digitar o mesmo endereço em seu navegador preferido. O endereço usado na criação do projeto foi este:
+  http://localhost:3000/
 
-  http://localhost:5173/
+# Agora conecte o front end com o back end através da pasta services, em baseURL, coloque a url que o back end está rodando, ex: "http://localhost:3030".
+
+
 ```
-
-#### 🔑 Quer ver como a aplicação funciona vista pelo Admin? Use a conta a seguir:
-
-```bash
-  e-mail: lucas@gmail.com  
-  senha: 123
-```
-___
-
-Este BackEnd foi hospedado diretamente no Render.
-Já o Frontend foi hospedado diretamente no Netlify.
-
-___
-Obs.: Por estar hospedado em um serviço gratuito, o BackEnd "hiberna" após 15 minutos sem utilização.
-<br>
-Se você está tentando acessar o site e o BackEnd não responde, apenas aguarde, pois ele estará "inicializando" os serviços.
-<br>
-Esta etapa poderá demorar até 1 minuto, dependendo da carga nos servidores do Render.
-
-[Veja aqui o resultado final](https://main--marvelous-douhua-7e1bba.netlify.app/)
+Este projeto não tem deploy, em virtude de problemas de operações com o NEXTJS.
