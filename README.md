@@ -41,7 +41,7 @@ ___
 Clone o projeto para o local desejado em seu computador.
 
 ```bash
-$ git clone git@github.com:joaozinhozerofive/deliveryFood-front-end.git
+$ https://github.com/joaozinhozerofive/devProfile-front-end.git
 ```
 ___
 ## 🚀 Como utilizar o BackEnd
