@@ -86,3 +86,7 @@ $ npm run dev
 
 ```
 Este projeto não tem deploy, em virtude de problemas de operações com o NEXTJS.
+
+<p align="center">
+    <img align="center" src="https://github-production-user-asset-6210df.s3.amazonaws.com/124640745/290680987-4419122f-7605-4f2a-abd4-9a110a8f2aff.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20231214%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231214T231446Z&X-Amz-Expires=300&X-Amz-Signature=591041156150661128a00e22a6513532ad9e9f5cb101bdccd31343281ac8519a&X-Amz-SignedHeaders=host&actor_id=124640745&key_id=0&repo_id=730812654" alt="banner"/>
+</p>
