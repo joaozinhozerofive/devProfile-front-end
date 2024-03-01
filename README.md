@@ -88,5 +88,5 @@ $ npm run dev
 Este projeto não tem deploy, em virtude de problemas de operações com o NEXTJS.
 
 <p align="center">
-    <img align="center" src="https://private-user-images.githubusercontent.com/124640745/290680987-4419122f-7605-4f2a-abd4-9a110a8f2aff.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDgzODk2MjcsIm5iZiI6MTcwODM4OTMyNywicGF0aCI6Ii8xMjQ2NDA3NDUvMjkwNjgwOTg3LTQ0MTkxMjJmLTc2MDUtNGYyYS1hYmQ0LTlhMTEwYThmMmFmZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDIyMFQwMDM1MjdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03Y2M5MjM2YThjNzNmNjNiY2JjZTQzN2E4ODk0ODdmYjIwMDJiOTZmOWNjYzNiOTRjMzNmNjE4NTVjZmIxYzg1JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.h1ipDYQka3IRWBFapvYZEkNjKJubBhPnIE1se6Oywo8" alt="banner"/>
+    <img align="center" src="![Captura de tela 2024-03-01 163449](https://github.com/joaozinhozerofive/devProfile-front-end/assets/124640745/e482168e-2ce5-4475-a8ee-fbc31d2b6755)" alt="banner"/>
 </p>
