@@ -88,5 +88,5 @@ $ npm run dev
 Este projeto não tem deploy, em virtude de problemas de operações com o NEXTJS.
 
 <p align="center">
-    <img align="center" src="![Captura de tela 2024-03-01 163449](https://github.com/joaozinhozerofive/devProfile-front-end/assets/124640745/e482168e-2ce5-4475-a8ee-fbc31d2b6755)" alt="banner"/>
+    <img align="center" src="https://github.com/joaozinhozerofive/devProfile-front-end/assets/124640745/e482168e-2ce5-4475-a8ee-fbc31d2b6755" alt="banner"/>
 </p>
